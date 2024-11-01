@@ -22,7 +22,6 @@ namespace Game.Infrastructure.Core
     public void Enter() =>
       _scenes.Load(ScenesList.Main)
              .Do(_arenaFactory.CreateCombatants)
-             .Do(_stateMachine.Enter<GameLoopState>)
-             .Do(_arena.RunTurn);
+             .Do(_stateMachine.Enter<GameLoopState>);
   }
 }
