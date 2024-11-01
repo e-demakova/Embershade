@@ -1,4 +1,5 @@
 ﻿using Game.Audio;
+using Game.Battles;
 using Game.Infrastructure.AssetsManagement;
 using Game.Infrastructure.Data;
 using Game.Infrastructure.Scenes;
@@ -20,6 +21,9 @@ namespace Game.Infrastructure.Core
       Container.BindService<BuildersFactory>();
       Container.BindService<AssetProvider>();
       Container.BindService<AudioPlayer>();
+
+      Container.BindService<Arena>();
+      Container.BindService<ArenaFactory>();
     }
 
     private void BindGameStateMachine()
@@ -29,6 +33,7 @@ namespace Game.Infrastructure.Core
       Container.FullBind<BootstrapState>();
       Container.FullBind<GameLoopState>();
       Container.FullBind<LoadSceneState>();
+      Container.FullBind<LoadArenaState>();
     }
   }
 }

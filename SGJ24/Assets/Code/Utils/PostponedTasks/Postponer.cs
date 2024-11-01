@@ -7,26 +7,21 @@ namespace Utils.PostponedTasks
   {
     private const bool AutoRun = true;
 
+    public static PostponedSequence Sequence() =>
+      SetUpSequence(new PostponedSequence());
+
     public static PostponedSequence Wait(Func<UniTask> task)
     {
       PostponedSequence sequence = new();
       sequence.Wait(task);
-      
-      if (AutoRun) 
-        Run(sequence).Forget();
-
-      return sequence;
+      return SetUpSequence(sequence);
     }
 
     public static PostponedSequence Do(Action action)
     {
       PostponedSequence sequence = new();
       sequence.Do(action);
-      
-      if (AutoRun) 
-        Run(sequence).Forget();
-
-      return sequence;
+      return SetUpSequence(sequence);
     }
 
     private static async UniTask Run(PostponedSequence sequence)
@@ -34,6 +29,14 @@ namespace Utils.PostponedTasks
       await UniTask.Yield();
       await UniTask.NextFrame();
       await sequence.Run();
+    }
+
+    private static PostponedSequence SetUpSequence(PostponedSequence sequence)
+    {
+      if (AutoRun)
+        Run(sequence).Forget();
+
+      return sequence;
     }
   }
 }

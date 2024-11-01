@@ -1,5 +1,4 @@
 ﻿using Game.Infrastructure.Core;
-using Game.Infrastructure.Scenes;
 using Utils.UI;
 using Zenject;
 
@@ -14,6 +13,6 @@ namespace Game.UI
       _stateMachine = stateMachine;
 
     protected override void OnClick() =>
-      _stateMachine.Enter<LoadSceneState, string>(ScenesList.Main);
+      _stateMachine.Enter<LoadArenaState>();
   }
 }

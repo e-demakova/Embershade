@@ -2,6 +2,6 @@
 {
   public static class GameSettings
   {
-    public const bool ShowLogo = true;
+    public static bool ShowLogo = false;
   }
 }

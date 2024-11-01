@@ -10,10 +10,8 @@ namespace Game
     private SceneData SceneData => _gameData.Get<SceneData>();
 
     [Inject]
-    private void Construct(IGameData gameData)
-    {
+    private void Construct(IGameData gameData) =>
       _gameData = gameData;
-    }
 
     private void Start() =>
       SceneData.Register(this);
