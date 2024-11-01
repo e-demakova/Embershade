@@ -24,8 +24,8 @@ namespace Game.Battles
 
     public void CreateCombatants()
     {
-      _builders.FromResources(Assets.Hero).At(CombatantsConfigs.HeroPosition).Instantiate<Combatant>().AddTo(Combatants);
-      _builders.FromResources(Assets.Enemy).At(CombatantsConfigs.EnemyPosition).Instantiate<Combatant>().AddTo(Combatants);
+      _builders.FromResources(Assets.Hero).At(Battles.Combatants.HeroPosition).Instantiate<Combatant>().AddTo(Combatants);
+      _builders.FromResources(Assets.Enemy).At(Battles.Combatants.EnemyPosition).Instantiate<Combatant>().AddTo(Combatants);
     }
   }
 }

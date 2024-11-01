@@ -9,7 +9,7 @@ namespace Game.Battles
     [SerializeField]
     private Ease _ease;
     
-    private Vector2 _homePosition;
+    private Vector3 _homePosition;
 
     private void Start() =>
       _homePosition = transform.position;
