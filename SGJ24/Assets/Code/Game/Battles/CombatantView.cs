@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 namespace Game.Battles
 {
-  public class Combatant : MonoBehaviour
+  public class CombatantView : MonoBehaviour
   {
     [FormerlySerializedAs("_view")]
     [SerializeField]
@@ -34,7 +34,7 @@ namespace Game.Battles
       rendering.SetToBack();
     }
 
-    public async UniTask MoveToTarget(Combatant target)
+    public async UniTask MoveToTarget(CombatantView target)
     {
       rendering.SetToFront();
       Vector3 position = target.transform.position;

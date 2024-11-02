@@ -7,5 +7,6 @@
     
     public const string Hero = "Battle/hero";
     public const string Enemy = "Battle/enemy";
+    public const string Support = "Battle/support";
   }
 }

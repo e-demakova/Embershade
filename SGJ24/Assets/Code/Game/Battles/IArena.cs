@@ -17,15 +17,17 @@ namespace Game.Battles
   {
     private readonly IGameData _data;
     private readonly IGameStateMachine _stateMachine;
-    
+    private readonly IReactionsInvoker _invoker;
+
     private List<CombatantData> Combatants => _data.Get<ArenaData>().Combatants.Values.ToList();
     private BattleUI BattleUI => _data.Get<SceneData>().Get<BattleUI>();
     private MainCamera MainCamera => _data.Get<SceneData>().Get<MainCamera>();
 
-    public Arena(IGameData data, IGameStateMachine stateMachine)
+    public Arena(IGameData data, IGameStateMachine stateMachine, IReactionsInvoker invoker)
     {
       _data = data;
       _stateMachine = stateMachine;
+      _invoker = invoker;
     }
 
     public void RunTurn()
@@ -44,9 +46,9 @@ namespace Game.Battles
 
     private async UniTask Attack(CombatantData actor, CombatantData target)
     {
-      if(actor.IsDead)
+      if (actor.IsDead)
         return;
-      
+
       await actor.Instance.MoveToTarget(target.Instance);
 
       MainCamera.Shake().Forget();
@@ -55,11 +57,14 @@ namespace Game.Battles
 
       if (target.IsDead)
       {
-        Vector3 position = target.Instance.transform.position;
-        position.z = -5;
-        position.y += 2;
-        position.x *= 0.7f;
-        MainCamera.Move(position, 0.1f).Forget();
+        MoveCamera(target);
+
+        DeathTrigger trigger = new() { Corpse = target, Killer = actor };
+
+        foreach (CombatantData owner in Combatants)
+        foreach (IReaction reaction in owner.Reactions)
+          _invoker.Invoke(reaction, trigger, owner);
+
         await target.Instance.Dead();
       }
       else
@@ -79,6 +84,15 @@ namespace Game.Battles
         await MainCamera.Zoom(-10, 0.2f);
         BattleUI.Show();
       }
+    }
+
+    private void MoveCamera(CombatantData target)
+    {
+      Vector3 position = target.Instance.transform.position;
+      position.z = -5;
+      position.y += 2;
+      position.x *= 0.7f;
+      MainCamera.Move(position, 0.1f).Forget();
     }
   }
 }

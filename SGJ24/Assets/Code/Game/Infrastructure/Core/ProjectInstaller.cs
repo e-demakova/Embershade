@@ -24,6 +24,7 @@ namespace Game.Infrastructure.Core
 
       Container.BindService<Arena>();
       Container.BindService<ArenaFactory>();
+      Container.BindService<ReactionsInvoker>();
     }
 
     private void BindGameStateMachine()
