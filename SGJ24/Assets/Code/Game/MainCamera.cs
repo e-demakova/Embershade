@@ -6,6 +6,18 @@ namespace Game
 {
   public class MainCamera : ControllableMono<MainCamera>
   {
+    private static readonly float ZoomInTarget = -6;
+    private static readonly float ZoomInDuration = 0.4f;
+
+    private static readonly float ZoomOutTarget = -10;
+    private static readonly float ZoomOutDuration = 0.2f;
+
+    public async UniTask ZoomOut() =>
+      await Zoom(ZoomOutTarget, ZoomOutDuration);
+
+    public async UniTask ZoomIn() =>
+      await Zoom(ZoomInTarget, ZoomInDuration);
+
     public async UniTask Zoom(float to, float duration)
     {
       await DOTween.Sequence()
@@ -15,10 +27,7 @@ namespace Game
                    .WithCancellation(this.GetCancellationTokenOnDestroy());
     }
 
-    public async UniTask Move(Vector3 to, float duration) =>
-      await transform.DOMove(to, duration).WithCancellation(this.GetCancellationTokenOnDestroy());
-
     public async UniTask Shake() =>
-      await transform.DOShakePosition(0.1f).WithCancellation(this.GetCancellationTokenOnDestroy());
+      await transform.DOShakePosition(0.3f, 0.3f).WithCancellation(this.GetCancellationTokenOnDestroy());
   }
 }

@@ -25,6 +25,7 @@ namespace Game.Battles
     {
       _rendering.OnGetHit(hp);
       await transform.DOShakePosition(0.1f, new Vector3(0.5f, 0, 0)).WithCancellation(this.GetCancellationTokenOnDestroy());
+      await UniTask.WaitForSeconds(0.2f);
     }
 
     public async UniTask Dead()
@@ -43,7 +44,7 @@ namespace Game.Battles
     {
       _rendering.OnAttack();
       Vector3 position = target.transform.position;
-      position.x *= 0.7f;
+      position.x *= 0.3f;
       await Move(position);
     }
 

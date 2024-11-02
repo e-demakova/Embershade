@@ -16,6 +16,12 @@ namespace Game.Dialogues
     [SerializeField]
     private TextMeshProUGUI _text;
 
+    [SerializeField]
+    private float _duration = 0.3f;
+
+    [SerializeField]
+    private float _shakeDuration = 0.1f;
+
     private IGameData _data;
 
     private LocalizationData Localization => _data.Get<LocalizationData>();
@@ -30,8 +36,8 @@ namespace Game.Dialogues
       _canvasGroup.alpha = 0;
 
       await DOTween.Sequence()
-                   .Join(_canvasGroup.DOFade(1, 0.3f))
-                   .Join(transform.DOShakePosition(0.1f, new Vector3(10f, 5f, 0f)))
+                   .Join(_canvasGroup.DOFade(1, _duration))
+                   .Join(transform.DOShakePosition(_shakeDuration, new Vector3(10f, 5f, 0f)))
                    .WithCancellation(this.GetCancellationTokenOnDestroy());
     }
 

@@ -1,6 +1,9 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using Cysharp.Threading.Tasks;
 using Game.Battles.Reactions;
 using Game.Battles.Triggers;
+using UnityEngine;
+using Utils.SmartDebug;
 using Zenject;
 
 namespace Game.Battles
@@ -18,13 +21,20 @@ namespace Game.Battles
     {
       _container = container;
     }
-    
+
     public async UniTask React(IReaction reaction, ITrigger trigger, CombatantData combatant)
     {
-      _container.Inject(reaction);
-      
-      if (reaction.CanReact(trigger, combatant))
-        await reaction.React(trigger, combatant);
+      try
+      {
+        _container.Inject(reaction);
+
+        if (reaction.CanReact(trigger, combatant))
+          await reaction.React(trigger, combatant);
+      }
+      catch (Exception exception)
+      {
+        Debug.LogError("Exception in reaction " + reaction.GetType().Name.White() + " " + exception);
+      }
     }
   }
 }

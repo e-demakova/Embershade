@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 2795890308556981479}
   - component: {fileID: 2764813348075848084}
   - component: {fileID: 3145593011109827970}
-  - component: {fileID: 739646268617565186}
   - component: {fileID: 7273849903635164175}
   m_Layer: 0
-  m_Name: dialogue
+  m_Name: dialogue-replica
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,19 +132,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &739646268617565186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2220266858650610953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7abec927b91546bf9cb845eadeb83387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _replica: {fileID: 7273849903635164175}
 --- !u!114 &7273849903635164175
 MonoBehaviour:
   m_ObjectHideFlags: 0

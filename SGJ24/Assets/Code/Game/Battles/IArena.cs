@@ -5,7 +5,6 @@ using Game.Battles.Reactions;
 using Game.Battles.Triggers;
 using Game.Infrastructure.Core;
 using Game.Infrastructure.Data;
-using UnityEngine;
 using Utils.PostponedTasks;
 
 namespace Game.Battles
@@ -35,8 +34,7 @@ namespace Game.Battles
 
     public void Run() =>
       Postponer.Do(BattleUI.Hide)
-               .Wait(() => MainCamera.Zoom(-6, 0.4f))
-               .Wait(() => React(new TurnStartedTrigger()))
+               .Wait(() => React(new BattleStartedTrigger()))
                .Do(BattleUI.Show);
 
     public void RunTurn()
@@ -44,7 +42,7 @@ namespace Game.Battles
       PostponedSequence sequence = Postponer.Sequence();
 
       sequence.Do(BattleUI.Hide)
-              .Wait(() => MainCamera.Zoom(-6, 0.4f))
+              .Wait(MainCamera.ZoomIn)
               .Wait(() => React(new TurnStartedTrigger()));
 
       foreach (CombatantData actor in Combatants)
@@ -67,10 +65,8 @@ namespace Game.Battles
 
       if (target.IsDead)
       {
-        await MoveCamera(target);
-
-        await React(new DeathTrigger { Corpse = target, Killer = actor });
         await target.Instance.Dead();
+        await React(new DeathTrigger { Corpse = target, Killer = actor });
       }
       else
       {
@@ -93,18 +89,9 @@ namespace Game.Battles
       }
       else
       {
-        await MainCamera.Zoom(-10, 0.2f);
+        await MainCamera.ZoomOut();
         BattleUI.Show();
       }
-    }
-
-    private async UniTask MoveCamera(CombatantData target)
-    {
-      Vector3 position = target.Instance.transform.position;
-      position.z = -5;
-      position.y += 2;
-      position.x *= 0.7f;
-      await MainCamera.Move(position, 0.1f);
     }
   }
 }

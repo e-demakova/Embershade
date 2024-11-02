@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
 using Utils.Observing.SubjectProperties;
 
@@ -21,13 +23,15 @@ namespace Game.Battles
     [SerializeField]
     private CanvasGroup _canvasGroup;
 
-    private void Start() =>
+    private void Start()
+    {
       _canvasGroup.alpha = 0;
+    }
 
     public void OnAttack()
     {
       _renderer.sortingOrder = 1;
-      _canvasGroup.alpha = 0;
+      FadeCanvasGroup();
     }
 
     public void OnHome()
@@ -40,10 +44,16 @@ namespace Game.Battles
     {
       _defaultView.SetActive(false);
       _deadView.SetActive(true);
-      _canvasGroup.alpha = 0;
+      _canvasGroup.alpha = 0f;
     }
 
-    public void OnGetHit(SubjectInt hp) =>
+    public void OnGetHit(SubjectInt hp)
+    {
+      _canvasGroup.alpha = 1;
       _hpSlider.fillAmount = hp.Value / (float) hp.Max;
+    }
+
+    private void FadeCanvasGroup() =>
+      _canvasGroup.DOFade(0, 0.1f).WithCancellation(_canvasGroup.GetCancellationTokenOnDestroy());
   }
 }
