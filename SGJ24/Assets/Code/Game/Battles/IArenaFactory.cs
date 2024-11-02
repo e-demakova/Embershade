@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using Game.Infrastructure.AssetsManagement;
+﻿using Game.Infrastructure.AssetsManagement;
 using Game.Infrastructure.Data;
-using Utils.Extensions;
 
 namespace Game.Battles
 {

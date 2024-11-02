@@ -25,13 +25,14 @@ namespace Utils.Localization
   public class LocalizedTMP : MonoBehaviour
   {
     private IGameData _data;
-    private LocalizationData Localization => _data.Get<LocalizationData>();
     
     [SerializeField]
     private LocalizedString _localizedString;
 
     private TextMeshProUGUI _text;
     private IDisposable _subscriber;
+
+    private LocalizationData Localization => _data.Get<LocalizationData>();
 
     [Inject]
     private void Construct(IGameData data) =>

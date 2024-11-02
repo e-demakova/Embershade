@@ -1,5 +1,6 @@
 ﻿using Input;
 using UnityEngine.EventSystems;
+using Utils.Observing.Subscribers;
 
 namespace Game.PlayerInput
 {
@@ -7,6 +8,7 @@ namespace Game.PlayerInput
   {
     EventSystem EventSystem { get; }
     bool Enabled { set; }
-    public Actions.PlayerActions Main { get; }
+    Actions.PlayerActions Main { get; }
+    ISubscriber<InputContext> OnAct { get; }
   }
 }

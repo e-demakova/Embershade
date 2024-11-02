@@ -1,16 +1,11 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Game.Battles.Triggers;
 using Game.Infrastructure.Data;
 using Zenject;
 
-namespace Game.Battles
+namespace Game.Battles.Reactions
 {
-  public interface IReaction
-  {
-    bool CanReact(ITrigger trigger, CombatantData owner);
-    UniTask React(ITrigger trigger, CombatantData owner);
-  }
-
-  public class SummonOnDeathReaction : IReaction
+  public class SummonOnDeath : IReaction
   {
     private int _availableExecutions = 1;
 

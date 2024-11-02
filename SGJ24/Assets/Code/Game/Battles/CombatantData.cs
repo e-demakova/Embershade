@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Battles.Reactions;
 using Game.Infrastructure.Data;
 
 namespace Game.Battles

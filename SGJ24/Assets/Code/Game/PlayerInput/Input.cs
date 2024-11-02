@@ -27,6 +27,7 @@ namespace Game.PlayerInput
 
     private EventSystem _eventSystem;
     public Actions.PlayerActions Main => _actions.Player;
+    public ISubscriber<InputContext> OnAct => OnAction(Main.Act);
    
     public EventSystem EventSystem =>
       _eventSystem ??= _factory.FromResources(Assets.EventSystem).Instantiate<EventSystem>().DontDestroyOnLoad();

@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using Game.Battles.Reactions;
+using Game.Battles.Triggers;
 using Game.Infrastructure.Core;
 using Game.Infrastructure.Data;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace Game.Battles
 {
   public interface IArena
   {
+    void Run();
     void RunTurn();
   }
 
@@ -30,12 +33,19 @@ namespace Game.Battles
       _invoker = invoker;
     }
 
+    public void Run() =>
+      Postponer.Do(BattleUI.Hide)
+               .Wait(() => MainCamera.Zoom(-6, 0.4f))
+               .Wait(() => React(new TurnStartedTrigger()))
+               .Do(BattleUI.Show);
+
     public void RunTurn()
     {
       PostponedSequence sequence = Postponer.Sequence();
 
       sequence.Do(BattleUI.Hide)
-              .Wait(() => MainCamera.Zoom(-6, 0.4f));
+              .Wait(() => MainCamera.Zoom(-6, 0.4f))
+              .Wait(() => React(new TurnStartedTrigger()));
 
       foreach (CombatantData actor in Combatants)
       foreach (CombatantData target in Combatants.Where(x => actor.TargetMatch(x)))
@@ -57,20 +67,22 @@ namespace Game.Battles
 
       if (target.IsDead)
       {
-        MoveCamera(target);
+        await MoveCamera(target);
 
-        DeathTrigger trigger = new() { Corpse = target, Killer = actor };
-
-        foreach (CombatantData owner in Combatants)
-        foreach (IReaction reaction in owner.Reactions)
-          _invoker.Invoke(reaction, trigger, owner);
-
+        await React(new DeathTrigger { Corpse = target, Killer = actor });
         await target.Instance.Dead();
       }
       else
       {
         await actor.Instance.MoveToHome();
       }
+    }
+
+    private async UniTask React(ITrigger trigger)
+    {
+      foreach (CombatantData owner in Combatants)
+      foreach (IReaction reaction in owner.Reactions)
+        await _invoker.React(reaction, trigger, owner);
     }
 
     private async UniTask EndTurn()
@@ -86,13 +98,13 @@ namespace Game.Battles
       }
     }
 
-    private void MoveCamera(CombatantData target)
+    private async UniTask MoveCamera(CombatantData target)
     {
       Vector3 position = target.Instance.transform.position;
       position.z = -5;
       position.y += 2;
       position.x *= 0.7f;
-      MainCamera.Move(position, 0.1f).Forget();
+      await MainCamera.Move(position, 0.1f);
     }
   }
 }

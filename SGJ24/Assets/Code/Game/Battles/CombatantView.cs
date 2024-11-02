@@ -2,7 +2,6 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Utils.Observing.SubjectProperties;
 
 namespace Game.Battles

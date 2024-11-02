@@ -1,11 +1,13 @@
 ﻿using Cysharp.Threading.Tasks;
+using Game.Battles.Reactions;
+using Game.Battles.Triggers;
 using Zenject;
 
 namespace Game.Battles
 {
   public interface IReactionsInvoker
   {
-    UniTask Invoke(IReaction reaction, ITrigger trigger, CombatantData combatant);
+    UniTask React(IReaction reaction, ITrigger trigger, CombatantData combatant);
   }
 
   public class ReactionsInvoker : IReactionsInvoker
@@ -17,7 +19,7 @@ namespace Game.Battles
       _container = container;
     }
     
-    public async UniTask Invoke(IReaction reaction, ITrigger trigger, CombatantData combatant)
+    public async UniTask React(IReaction reaction, ITrigger trigger, CombatantData combatant)
     {
       _container.Inject(reaction);
       

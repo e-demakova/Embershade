@@ -1,7 +1,5 @@
-﻿namespace Game.Battles
+namespace Game.Battles.Triggers
 {
-  public interface ITrigger { }
-
   public class DeathTrigger : ITrigger
   {
     public CombatantData Corpse;

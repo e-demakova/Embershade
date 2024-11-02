@@ -20,7 +20,10 @@ namespace Game.Battles
 
     [SerializeField]
     private CanvasGroup _canvasGroup;
-    
+
+    private void Start() =>
+      _canvasGroup.alpha = 0;
+
     public void OnAttack()
     {
       _renderer.sortingOrder = 1;

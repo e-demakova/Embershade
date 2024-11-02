@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Game.Infrastructure.Data;
-using Utils.Observing.SubjectProperties;
 
 namespace Game.Battles
 {
