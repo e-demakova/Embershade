@@ -1,5 +1,6 @@
 ﻿using Game.Infrastructure.AssetsManagement;
 using Game.Infrastructure.Data;
+using UnityEngine;
 
 namespace Game.Battles
 {
@@ -22,14 +23,23 @@ namespace Game.Battles
 
     public void CreateCombatants()
     {
-      ArenaData.Combatants[CombatantType.Hero].Instance =
-        _builders.FromResources(Assets.Hero).At(new(-2.5f, -2.5f, 8f)).Instantiate<CombatantView>();
-
-      ArenaData.Combatants[CombatantType.Enemy].Instance =
-        _builders.FromResources(Assets.Enemy).At(new(2.5f, -2.5f, 8f)).Instantiate<CombatantView>();
+      CreateHero();
+      CreateEnemy();
 
       if (ArenaData.SupportArrived)
         _builders.FromResources(Assets.Support).Instantiate();
+    }
+
+    private void CreateHero()
+    {
+      ArenaData.Combatants[CombatantType.Hero].Instance =
+        _builders.FromResources(Assets.Hero).At(new Vector3(-2.5f, -2.5f, 8f)).Instantiate<CombatantView>();
+    }
+
+    private void CreateEnemy()
+    {
+      CombatantData enemy = ArenaData.Combatants[CombatantType.Enemy] = CombatantsList.DefaultEnemy;
+      enemy.Instance = _builders.FromResources(Assets.Enemy).At(new Vector3(2.5f, -2.5f, 8f)).Instantiate<CombatantView>();
     }
   }
 }

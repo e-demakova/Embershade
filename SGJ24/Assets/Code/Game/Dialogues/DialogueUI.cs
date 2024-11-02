@@ -61,7 +61,7 @@ namespace Game.Dialogues
     private async UniTask WaitPlayerInput()
     {
       _skip = false;
-      IDisposable subscriber = _input.OnAct.Down().Subscribe(() => _skip = true);
+      IDisposable subscriber = _input.OnAct.Up().Subscribe(() => _skip = true);
       await UniTask.WaitUntil(() => _skip);
       subscriber.Dispose();
     }
