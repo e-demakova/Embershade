@@ -14,7 +14,7 @@ namespace Game.Battles
   {
     private readonly IBuildersFactory _builders;
     private readonly IGameData _data;
-    private List<Combatant> Combatants => _data.Get<ArenaData>().Combatants;
+    private ArenaData ArenaData => _data.Get<ArenaData>();
 
     public ArenaFactory(IBuildersFactory builders, IGameData data)
     {
@@ -24,8 +24,11 @@ namespace Game.Battles
 
     public void CreateCombatants()
     {
-      _builders.FromResources(Assets.Hero).At(Battles.Combatants.HeroPosition).Instantiate<Combatant>().AddTo(Combatants);
-      _builders.FromResources(Assets.Enemy).At(Battles.Combatants.EnemyPosition).Instantiate<Combatant>().AddTo(Combatants);
+      ArenaData.Combatants[CombatantType.Hero].Instance =
+        _builders.FromResources(Assets.Hero).At(Combatants.HeroPosition).Instantiate<Combatant>();
+
+      ArenaData.Combatants[CombatantType.Enemy].Instance =
+        _builders.FromResources(Assets.Enemy).At(Combatants.EnemyPosition).Instantiate<Combatant>();
     }
   }
 }

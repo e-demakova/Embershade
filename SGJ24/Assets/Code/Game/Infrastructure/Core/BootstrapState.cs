@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Infrastructure.Scenes;
+using Utils.PostponedTasks;
 using Utils.StateMachine.States;
 
 namespace Game.Infrastructure.Core
@@ -7,20 +8,20 @@ namespace Game.Infrastructure.Core
   public class BootstrapState : IGameState, IEnterState
   {
     private readonly IGameStateMachine _stateMachine;
-    private readonly ISceneLoader _sceneLoader;
+    private readonly ISceneLoader _loader;
 
-    public BootstrapState(IGameStateMachine stateMachine, ISceneLoader sceneLoader)
+    public BootstrapState(IGameStateMachine stateMachine, ISceneLoader loader)
     {
       _stateMachine = stateMachine;
-      _sceneLoader = sceneLoader;
+      _loader = loader;
     }
 
     public void Enter()
     {
       if (GameSettings.ShowLogo)
-        _sceneLoader.Load(ScenesList.Logo)
-                    .Wait(ShowLogo)
-                    .Do(LoadMenu);
+        Postponer.Wait(() => _loader.Load(ScenesList.Logo))
+                 .Wait(ShowLogo)
+                 .Do(LoadMenu);
       else
         LoadMenu();
     }

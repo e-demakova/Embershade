@@ -1,12 +1,13 @@
-﻿using Game.Infrastructure.AssetsManagement;
+﻿using Cysharp.Threading.Tasks;
+using Game.Infrastructure.AssetsManagement;
 using UnityEngine.SceneManagement;
-using Utils.PostponedTasks;
 
 namespace Game.Infrastructure.Scenes
 {
   public interface ISceneLoader
   {
-    PostponedSequence Load(string scene);
+    LoadingScreen LoadingScreen { get; }
+    UniTask Load(string scene);
   }
 
   public class SceneLoader : ISceneLoader
@@ -19,9 +20,7 @@ namespace Game.Infrastructure.Scenes
     public SceneLoader(IBuildersFactory factory) =>
       _factory = factory;
 
-    public PostponedSequence Load(string scene) =>
-      Postponer.Wait(LoadingScreen.Appear)
-               .Do(() => SceneManager.LoadScene(scene))
-               .Wait(LoadingScreen.Fade);
+    public async UniTask Load(string scene) =>
+      await SceneManager.LoadSceneAsync(scene).ToUniTask();
   }
 }

@@ -1,4 +1,5 @@
 ﻿using Game.Infrastructure.Scenes;
+using Utils.PostponedTasks;
 using Utils.StateMachine.States;
 
 namespace Game.Infrastructure.Core
@@ -6,16 +7,18 @@ namespace Game.Infrastructure.Core
   public class LoadSceneState : IGameState, IPayloadState<string>
   {
     private readonly IGameStateMachine _stateMachine;
-    private readonly ISceneLoader _scenes;
+    private readonly ISceneLoader _loader;
 
-    public LoadSceneState(IGameStateMachine stateMachine, ISceneLoader scenes)
+    public LoadSceneState(IGameStateMachine stateMachine, ISceneLoader loader)
     {
       _stateMachine = stateMachine;
-      _scenes = scenes;
+      _loader = loader;
     }
 
     public void Enter(string payload) =>
-      _scenes.Load(payload)
-             .Do(_stateMachine.Enter<GameLoopState>);
+      Postponer.Wait(_loader.LoadingScreen.Appear)
+               .Wait(() => _loader.Load(payload))
+               .Wait(_loader.LoadingScreen.Fade)
+               .Do(_stateMachine.Enter<GameLoopState>);
   }
 }
