@@ -23,10 +23,10 @@ namespace Game.Battles
     public void CreateCombatants()
     {
       ArenaData.Combatants[CombatantType.Hero].Instance =
-        _builders.FromResources(Assets.Hero).At(Combatants.HeroPosition).Instantiate<CombatantView>();
+        _builders.FromResources(Assets.Hero).At(new(-2.5f, -2.5f, 8f)).Instantiate<CombatantView>();
 
       ArenaData.Combatants[CombatantType.Enemy].Instance =
-        _builders.FromResources(Assets.Enemy).At(Combatants.EnemyPosition).Instantiate<CombatantView>();
+        _builders.FromResources(Assets.Enemy).At(new(2.5f, -2.5f, 8f)).Instantiate<CombatantView>();
 
       if (ArenaData.SupportArrived)
         _builders.FromResources(Assets.Support).Instantiate();

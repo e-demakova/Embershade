@@ -51,7 +51,7 @@ namespace Game.Dialogues
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "You " },
+          new() { Language = Language.Eng, String = "You are absolutely right, hero!" },
           new() { Language = Language.Ru, String = "Ты абсолютно прав, герой!" }
         }
       },
@@ -59,7 +59,7 @@ namespace Game.Dialogues
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "Main character can't die so fast." },
+          new() { Language = Language.Eng, String = "Why should such a valuable soul be wasted?" },
           new() { Language = Language.Ru, String = "За чем же такой ценной душе пропадать?" }
         }
       },
@@ -67,7 +67,7 @@ namespace Game.Dialogues
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "Main character can't die so fast." },
+          new() { Language = Language.Eng, String = "Better exchange it with me!" },
           new() { Language = Language.Ru, String = "Лучше обменяй ее у меня!" }
         }
       }

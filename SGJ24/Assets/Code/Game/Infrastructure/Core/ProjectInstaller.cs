@@ -35,6 +35,7 @@ namespace Game.Infrastructure.Core
       Container.FullBind<GameLoopState>();
       Container.FullBind<LoadSceneState>();
       Container.FullBind<LoadArenaState>();
+      Container.FullBind<LoadShopState>();
     }
   }
 }

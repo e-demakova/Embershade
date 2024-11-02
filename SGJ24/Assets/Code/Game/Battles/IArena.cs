@@ -85,7 +85,8 @@ namespace Game.Battles
     {
       if (Combatants.Any(x => x.IsDead))
       {
-        _stateMachine.Enter<LoadArenaState>();
+        _stateMachine.Enter<LoadShopState>();
+        await React(new BattleEndTrigger());
       }
       else
       {

@@ -13,8 +13,8 @@ namespace Game.Battles
   {
     public readonly Dictionary<CombatantType, CombatantData> Combatants = new()
     {
-      { CombatantType.Hero, Battles.Combatants.FirstHero },
-      { CombatantType.Enemy, Battles.Combatants.DefaultEnemy },
+      { CombatantType.Hero, Battles.CombatantsList.FirstHero },
+      { CombatantType.Enemy, Battles.CombatantsList.DefaultEnemy },
     };
 
     public bool SupportArrived { get; set; }
