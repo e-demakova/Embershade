@@ -52,9 +52,10 @@ namespace Game.Shop
     private void ShowHeroes()
     {
       _heroesContainer.SetActive(true);
-      
-      foreach (HeroUI hero in _heroes)
-        hero.SetUp(CombatantsList.FirstHero, this);
+
+      _heroes[0].SetUp(CombatantsList.CatHero, this);
+      _heroes[1].SetUp(CombatantsList.ElfHero, this);
+      _heroes[2].SetUp(CombatantsList.KnightHero, this);
     }
 
     private void ShowCards()

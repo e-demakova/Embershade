@@ -11,6 +11,7 @@ namespace Game.Battles
     public CombatantStats Stats;
     public List<IReaction> Reactions;
     public Dictionary<Type, ICombatantTag> Tags;
+    public string SpritePath;
     
     public bool IsDead => Stats.Hp.Value <= 0;
 

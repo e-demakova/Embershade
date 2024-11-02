@@ -21,6 +21,12 @@ namespace Game.Battles
     private void Start() =>
       _homePosition = transform.position;
 
+    public CombatantView SetUp(Sprite sprite)
+    {
+      _rendering.SetSprite(sprite);
+      return this;
+    }
+    
     public async UniTask GetHit(SubjectInt hp)
     {
       _rendering.OnGetHit(hp);
@@ -32,6 +38,7 @@ namespace Game.Battles
     {
       _rendering.OnDead();
       await transform.DOShakePosition(1f, 0.5f).WithCancellation(this.GetCancellationTokenOnDestroy());
+      await UniTask.WaitForSeconds(1f);
     }
 
     public async UniTask MoveToHome()

@@ -335,6 +335,12 @@ MonoBehaviour:
   _deadView: {fileID: 3342841679136751840}
   _hpSlider: {fileID: 1505970143539249450}
   _canvasGroup: {fileID: 7407426228918311982}
+  _renderers:
+  - {fileID: 4157039736581512870}
+  - {fileID: 6287756987708331426}
+  _masks:
+  - {fileID: 8277611758584041205}
+  - {fileID: 6389079756207539862}
 --- !u!1 &6116571212029588798
 GameObject:
   m_ObjectHideFlags: 0

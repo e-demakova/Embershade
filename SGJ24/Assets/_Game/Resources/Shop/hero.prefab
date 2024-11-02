@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 3499339838795617096}
+  _image: {fileID: 5911110843912486382}
 --- !u!1 &5982427338666346542
 GameObject:
   m_ObjectHideFlags: 0

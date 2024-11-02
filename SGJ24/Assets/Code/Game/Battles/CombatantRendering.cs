@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
@@ -22,6 +23,20 @@ namespace Game.Battles
 
     [SerializeField]
     private CanvasGroup _canvasGroup;
+
+    [SerializeField]
+    private List<SpriteRenderer> _renderers;
+    [SerializeField]
+    private List<SpriteMask> _masks;
+    
+    public void SetSprite(Sprite sprite)
+    {
+      foreach (SpriteRenderer spriteRenderer in _renderers) 
+        spriteRenderer.sprite = sprite;
+
+      foreach (SpriteMask mask in _masks)
+        mask.sprite = sprite;
+    }
 
     private void Start()
     {
