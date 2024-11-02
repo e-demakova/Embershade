@@ -2,14 +2,17 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
+using Utils.Observing.SubjectProperties;
 
 namespace Game.Battles
 {
   public class CombatantView : MonoBehaviour
   {
+    [FormerlySerializedAs("rendering")]
     [FormerlySerializedAs("_view")]
     [SerializeField]
-    private CombatantRendering rendering;
+    private CombatantRendering _rendering;
     
     [SerializeField]
     private Ease _ease;
@@ -19,24 +22,27 @@ namespace Game.Battles
     private void Start() =>
       _homePosition = transform.position;
 
-    public async UniTask GetHit() =>
+    public async UniTask GetHit(SubjectInt hp)
+    {
+      _rendering.OnGetHit(hp);
       await transform.DOShakePosition(0.1f, new Vector3(0.5f, 0, 0)).WithCancellation(this.GetCancellationTokenOnDestroy());
+    }
 
     public async UniTask Dead()
     {
-      rendering.Dead();
+      _rendering.OnDead();
       await transform.DOShakePosition(1f, 0.5f).WithCancellation(this.GetCancellationTokenOnDestroy());
     }
 
     public async UniTask MoveToHome()
     {
       await Move(_homePosition);
-      rendering.SetToBack();
+      _rendering.OnHome();
     }
 
     public async UniTask MoveToTarget(CombatantView target)
     {
-      rendering.SetToFront();
+      _rendering.OnAttack();
       Vector3 position = target.transform.position;
       position.x *= 0.7f;
       await Move(position);

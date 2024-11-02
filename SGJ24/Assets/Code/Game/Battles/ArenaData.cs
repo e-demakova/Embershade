@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Game.Infrastructure.Data;
+using Utils.Observing.SubjectProperties;
 
 namespace Game.Battles
 {
@@ -14,7 +15,7 @@ namespace Game.Battles
     public readonly Dictionary<CombatantType, CombatantData> Combatants = new()
     {
       { CombatantType.Hero, Battles.Combatants.FirstHero },
-      { CombatantType.Enemy, new CombatantData { Stats = new CombatantStats { Attack = 1, Hp = 1 }, Reactions = new List<IReaction>() } },
+      { CombatantType.Enemy, Battles.Combatants.DefaultEnemy },
     };
 
     public bool SupportArrived { get; set; }

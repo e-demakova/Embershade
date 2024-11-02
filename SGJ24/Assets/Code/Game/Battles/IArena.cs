@@ -52,8 +52,8 @@ namespace Game.Battles
       await actor.Instance.MoveToTarget(target.Instance);
 
       MainCamera.Shake().Forget();
-      target.Stats.Hp -= actor.Stats.Attack;
-      await target.Instance.GetHit();
+      target.Stats.Hp.Value -= actor.Stats.Attack;
+      await target.Instance.GetHit(target.Stats.Hp);
 
       if (target.IsDead)
       {

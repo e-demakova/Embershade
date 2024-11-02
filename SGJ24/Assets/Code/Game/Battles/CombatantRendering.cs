@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using Utils.Observing.SubjectProperties;
 
 namespace Game.Battles
 {
@@ -13,16 +15,32 @@ namespace Game.Battles
     [SerializeField]
     private GameObject _deadView;
 
-    public void SetToFront() =>
+    [SerializeField]
+    private Image _hpSlider;
+
+    [SerializeField]
+    private CanvasGroup _canvasGroup;
+    
+    public void OnAttack()
+    {
       _renderer.sortingOrder = 1;
+      _canvasGroup.alpha = 0;
+    }
 
-    public void SetToBack() =>
+    public void OnHome()
+    {
       _renderer.sortingOrder = 0;
+      _canvasGroup.alpha = 1;
+    }
 
-    public void Dead()
+    public void OnDead()
     {
       _defaultView.SetActive(false);
       _deadView.SetActive(true);
+      _canvasGroup.alpha = 0;
     }
+
+    public void OnGetHit(SubjectInt hp) =>
+      _hpSlider.fillAmount = hp.Value / (float) hp.Max;
   }
 }

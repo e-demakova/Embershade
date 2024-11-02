@@ -1,8 +1,10 @@
-﻿namespace Game.Battles
+﻿using Utils.Observing.SubjectProperties;
+
+namespace Game.Battles
 {
-  public struct CombatantStats
+  public class CombatantStats
   {
     public int Attack;
-    public int Hp;
+    public SubjectInt Hp;
   }
 }
