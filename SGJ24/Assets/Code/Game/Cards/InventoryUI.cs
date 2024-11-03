@@ -13,6 +13,8 @@ namespace Game.Cards
 
     private IGameData _data;
 
+    public List<InventorySlotUI> Slots => _slots;
+
     [Inject]
     private void Construct(IGameData data)
     {
@@ -37,10 +39,10 @@ namespace Game.Cards
       gameObject.SetActive(true);
 
       for (int i = 0; i < cards.Count; i++)
-        _slots[i].SetUp(cards[i]);
+        Slots[i].SetUp(cards[i]);
 
-      for (int i = cards.Count; i < _slots.Count; i++)
-        _slots[i].Clear();
+      for (int i = cards.Count; i < Slots.Count; i++)
+        Slots[i].Clear();
     }
 
     public void Show() =>

@@ -29,7 +29,7 @@ namespace Utils.Localization
       if (entry == null)
       {
         DLogger.Message(DSenders.Localization)
-               .WithText(Language.ToString().White().Bold() + " localization not set fot string with id " + localizedString.Id.White().Bold())
+               .WithText(Language.ToString().White().Bold() + " localization not set fot string.")
                .WithFormat(DebugFormat.Exception)
                .Log();
 

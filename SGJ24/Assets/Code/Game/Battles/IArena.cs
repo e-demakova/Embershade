@@ -7,6 +7,7 @@ using Game.Cards;
 using Game.Infrastructure.Core;
 using Game.Infrastructure.Data;
 using Game.Shop;
+using UnityEngine;
 using Utils.PostponedTasks;
 
 namespace Game.Battles
@@ -24,6 +25,7 @@ namespace Game.Battles
     private readonly IReactionsInvoker _invoker;
     private readonly ISpellApplier _spellApplier;
 
+    private SceneData SceneData => _data.Get<SceneData>();
     private List<CombatantData> Combatants => _data.Get<ArenaData>().Combatants.Values.ToList();
     private BattleUI BattleUI => _data.Get<SceneData>().Get<BattleUI>();
     private InventoryUI InventoryUI => _data.Get<SceneData>().Get<InventoryUI>();
@@ -112,16 +114,27 @@ namespace Game.Battles
 
     private async UniTask ApplyCards()
     {
-      foreach (CardData card in _data.Get<InventoryData>().Cards)
-      foreach (ICardSpell spell in card.Spells)
-        await _spellApplier.ApplySpell(spell);
+      List<CardData> list = _data.Get<InventoryData>().Cards;
+      List<InventorySlotUI> slots = SceneData.Get<InventoryUI>().Slots;
+      InventoryTooltip tooltip = SceneData.Get<InventoryTooltip>();
+
+      for (int i = 0; i < list.Count; i++)
+      {
+        InventorySlotUI slot = slots[i];
+        tooltip.Show((RectTransform) slot.transform, slot.Card);
+
+        await UniTask.WaitForSeconds(0.5f);
+        await _spellApplier.ApplySpell(list[i].Spell);
+        await UniTask.WaitForSeconds(0.2f);
+      }
+
+      tooltip.Hide();
     }
 
     private void RevertCards()
     {
       foreach (CardData card in _data.Get<InventoryData>().Cards)
-      foreach (ICardSpell spell in card.Spells)
-        _spellApplier.RevertSpell(spell);
+        _spellApplier.RevertSpell(card.Spell);
     }
   }
 }

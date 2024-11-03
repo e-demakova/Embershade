@@ -65,9 +65,9 @@ namespace Game.Shop
     {
       _cardsContainer.SetActive(true);
 
-      _cards[0].SetUp(CardsList.Hand, this);
-      _cards[1].SetUp(CardsList.Heart, this);
-      _cards[2].SetUp(CardsList.Knife, this);
+      _cards[0].SetUp(CardsList.Eye, this);
+      _cards[1].SetUp(CardsList.Cake, this);
+      _cards[2].SetUp(CardsList.Finger, this);
     }
 
     public void Select(CombatantData combatant)

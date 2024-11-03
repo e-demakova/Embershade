@@ -30,6 +30,7 @@ namespace Game.Battles
 
     public void ResetQueue()
     {
+      EnemiesQueue.Clear();
       EnemiesQueue.Enqueue(CombatantsList.DefaultEnemy);
       EnemiesQueue.Enqueue(CombatantsList.EnemyOne);
       EnemiesQueue.Enqueue(CombatantsList.EnemyTwo);

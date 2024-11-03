@@ -236,7 +236,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizedString:
-    Id: volume
     Entries:
     - Language: 0
       String: 'Audio:'
@@ -926,7 +925,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizedString:
-    Id: current-language
     Entries:
     - Language: 0
       String: English
@@ -1485,7 +1483,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizedString:
-    Id: language
     Entries:
     - Language: 0
       String: 'Language:'
@@ -2751,7 +2748,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _localizedString:
-    Id: start
     Entries:
     - Language: 0
       String: New Game

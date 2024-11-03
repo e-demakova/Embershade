@@ -17,9 +17,9 @@
     public const string HeroKnight = "Battle/Sprites/knight";
     
     //cards
-    public const string CardHand = "Cards/hand";
-    public const string CardHeart = "Cards/heart";
-    public const string CardKnife = "Cards/knife";
+    public const string CardEye = "Cards/eye";
+    public const string CardCake = "Cards/cake";
+    public const string CardFinger = "Cards/finger";
     
     public const string Support = "Battle/support";
     public const string SupportAppear = "Battle/support-appear";

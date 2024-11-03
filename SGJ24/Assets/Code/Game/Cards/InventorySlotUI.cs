@@ -14,7 +14,7 @@ namespace Game.Cards
     [SerializeField]
     private Image _image;
 
-    private CardData _card;
+    public CardData Card;
     private IAssetProvider _assets;
     private IGameData _data;
 
@@ -27,33 +27,33 @@ namespace Game.Cards
 
     public void SetUp(CardData card)
     {
-      _card = card;
+      Card = card;
       _image.sprite = _assets.LoadAsset<Sprite>(card.SpritePath);
       _image.enabled = true;
     }
 
     public void Clear()
     {
-      _card = null;
+      Card = null;
       _image.enabled = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-      if (_card != null)
-        _data.Get<SceneData>().Get<InventoryTooltip>().Show((RectTransform) transform, _card);
+      if (Card != null)
+        _data.Get<SceneData>().Get<InventoryTooltip>().Show((RectTransform) transform, Card);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-      if (_card != null)
+      if (Card != null)
         _data.Get<SceneData>().Get<InventoryTooltip>().Hide();
     }
 
     protected override void OnClick()
     {
-      if (_card != null && _data.Get<SceneData>().TryGet(out ShopUI shop))
-        shop.SellCard(_card);
+      if (Card != null && _data.Get<SceneData>().TryGet(out ShopUI shop))
+        shop.SellCard(Card);
     }
   }
 }

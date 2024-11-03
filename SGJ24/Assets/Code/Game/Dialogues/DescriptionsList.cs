@@ -18,8 +18,8 @@ namespace Game.Dialogues
     {
       Entries = new List<LocalizedEntry>
       {
-        new() { Language = Language.Eng, String = "Increase hp on" },
-        new() { Language = Language.Ru, String = "Увеличивает хп на" }
+        new() { Language = Language.Eng, String = "Increase hp on {0}" },
+        new() { Language = Language.Ru, String = "Увеличивает хп на {0}" }
       }
     };
 
@@ -27,17 +27,17 @@ namespace Game.Dialogues
     {
       Entries = new List<LocalizedEntry>
       {
-        new() { Language = Language.Eng, String = "Increase attack on" },
-        new() { Language = Language.Ru, String = "Увеличивает атаку на" }
+        new() { Language = Language.Eng, String = "Increase attack on {0}" },
+        new() { Language = Language.Ru, String = "Увеличивает атаку на {0}" }
       }
     };
     
-    public static readonly LocalizedString Hand = new()
+    public static readonly LocalizedString DecreaseEnemyAttak = new()
     {
       Entries = new List<LocalizedEntry>
       {
-        new() { Language = Language.Eng, String = "Decrease enemy attack on" },
-        new() { Language = Language.Ru, String = "Уменьшает атаку противника на" }
+        new() { Language = Language.Eng, String = "Decrease enemy attack on {0}" },
+        new() { Language = Language.Ru, String = "Уменьшает атаку противника на {0}" }
       }
     };
   }

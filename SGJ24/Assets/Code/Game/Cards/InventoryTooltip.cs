@@ -33,7 +33,7 @@ namespace Game.Cards
       transform.position = position;
 
       _canvasGroup.alpha = 1;
-      _description.text = _data.Get<LocalizationData>().GetString(card.Description);
+      _description.text = card.Spell.Description(_data.Get<LocalizationData>());
       _sellCost.text = card.SellCost.ToString();
     }
 

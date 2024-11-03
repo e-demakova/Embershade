@@ -61,25 +61,25 @@ namespace Game.Battles
     public static CombatantData DefaultEnemy => new()
     {
       Stats = new CombatantStats { Atk = 1, Hp = 5 },
-      Reactions = new List<IReaction>(),
+      Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.Enemy,
       Souls = 2
-    }; 
-    
+    };
+
     public static CombatantData EnemyOne => new()
     {
-      Stats = new CombatantStats { Atk = 1, Hp = 5 },
-      Reactions = new List<IReaction>(),
+      Stats = new CombatantStats { Atk = 2, Hp = 7 },
+      Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.EnemyOne,
       Souls = 2
-    }; 
-    
+    };
+
     public static CombatantData EnemyTwo => new()
     {
-      Stats = new CombatantStats { Atk = 1, Hp = 5 },
-      Reactions = new List<IReaction>(),
+      Stats = new CombatantStats { Atk = 4, Hp = 25 },
+      Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.EnemyTwo,
       Souls = 2

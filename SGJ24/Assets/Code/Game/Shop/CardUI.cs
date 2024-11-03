@@ -38,7 +38,7 @@ namespace Game.Shop
       _shop = shopUI;
 
       _image.sprite = _assets.LoadAsset<Sprite>(data.SpritePath);
-      _description.text = _gameData.Get<LocalizationData>().GetString(_data.Description);
+      _description.text = data.Spell.Description(_gameData.Get<LocalizationData>());
       _cost.text = _data.BuyCost.ToString();
       UpdateCostView();
     }

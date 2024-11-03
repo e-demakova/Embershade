@@ -17,7 +17,6 @@ namespace Utils.Localization
   [Serializable]
   public class LocalizedString
   {
-    public string Id;
     public List<LocalizedEntry> Entries;
   }
   

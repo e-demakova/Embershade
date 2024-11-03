@@ -1,5 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Game.Battles;
+using Game.Dialogues;
+using Utils.Localization;
 
 namespace Game.Cards
 {
@@ -9,6 +11,9 @@ namespace Game.Cards
 
     public IncreaseHpSpell(int value) =>
       _value = value;
+
+    public string Description(LocalizationData localization) =>
+      string.Format(localization.GetString(DescriptionsList.Hp), _value);
 
     public bool CanApply(CombatantData combatant) =>
       combatant.Is<MainHeroTag>(out _);
