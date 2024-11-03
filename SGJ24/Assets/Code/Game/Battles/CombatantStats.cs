@@ -1,10 +1,8 @@
-﻿using Utils.Observing.SubjectProperties;
-
-namespace Game.Battles
+﻿namespace Game.Battles
 {
   public class CombatantStats
   {
-    public int Attack;
-    public SubjectInt Hp;
+    public int Atk;
+    public int Hp;
   }
 }

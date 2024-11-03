@@ -3,8 +3,10 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Game.Battles.Reactions;
 using Game.Battles.Triggers;
+using Game.Cards;
 using Game.Infrastructure.Core;
 using Game.Infrastructure.Data;
+using Game.Shop;
 using Utils.PostponedTasks;
 
 namespace Game.Battles
@@ -20,21 +22,24 @@ namespace Game.Battles
     private readonly IGameData _data;
     private readonly IGameStateMachine _stateMachine;
     private readonly IReactionsInvoker _invoker;
+    private readonly ISpellApplier _spellApplier;
 
     private List<CombatantData> Combatants => _data.Get<ArenaData>().Combatants.Values.ToList();
     private BattleUI BattleUI => _data.Get<SceneData>().Get<BattleUI>();
     private MainCamera MainCamera => _data.Get<SceneData>().Get<MainCamera>();
 
-    public Arena(IGameData data, IGameStateMachine stateMachine, IReactionsInvoker invoker)
+    public Arena(IGameData data, IGameStateMachine stateMachine, IReactionsInvoker invoker, ISpellApplier spellApplier)
     {
       _data = data;
       _stateMachine = stateMachine;
       _invoker = invoker;
+      _spellApplier = spellApplier;
     }
 
     public void Run() =>
       Postponer.Do(BattleUI.Hide)
                .Wait(() => React(new BattleStartedTrigger()))
+               .Wait(ApplyCards)
                .Do(BattleUI.Show);
 
     public void RunTurn()
@@ -60,8 +65,8 @@ namespace Game.Battles
       await actor.Instance.MoveToTarget(target.Instance);
 
       MainCamera.Shake().Forget();
-      target.Stats.Hp.Value -= actor.Stats.Attack;
-      await target.Instance.GetHit(target.Stats.Hp);
+      target.Stats.Hp -= actor.Stats.Atk;
+      await target.Instance.GetHit();
 
       if (target.IsDead)
       {
@@ -87,12 +92,27 @@ namespace Game.Battles
       {
         _stateMachine.Enter<LoadShopState>();
         await React(new BattleEndTrigger());
+        RevertCards();
       }
       else
       {
         await MainCamera.ZoomOut();
         BattleUI.Show();
       }
+    }
+
+    private async UniTask ApplyCards()
+    {
+      foreach (CardData card in _data.Get<InventoryData>().Cards)
+      foreach (ICardSpell spell in card.Spells)
+        await _spellApplier.ApplySpell(spell);
+    }
+
+    private void RevertCards()
+    {
+      foreach (CardData card in _data.Get<InventoryData>().Cards)
+      foreach (ICardSpell spell in card.Spells)
+        _spellApplier.RevertSpell(spell);
     }
   }
 }

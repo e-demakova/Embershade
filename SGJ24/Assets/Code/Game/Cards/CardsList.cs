@@ -24,7 +24,8 @@ namespace Game.Cards
     {
       BuyCost = 1,
       SpritePath = Assets.CardHeart,
-      Description = DescriptionsList.Hp
+      Description = DescriptionsList.Hp,
+      Spells = { new IncreaseHpSpell(2) }
     };
   }
 }

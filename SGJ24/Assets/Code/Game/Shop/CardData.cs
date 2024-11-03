@@ -1,4 +1,6 @@
-﻿using Game.Dialogues;
+﻿using System.Collections.Generic;
+using Game.Cards;
+using Game.Dialogues;
 using Game.Infrastructure.Data;
 using Utils.Localization;
 
@@ -11,5 +13,7 @@ namespace Game.Shop
     
     public string SpritePath;
     public LocalizedString Description = DescriptionsList.Default;
+
+    public List<ICardSpell> Spells = new();
   }
 }

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Infrastructure.AssetsManagement;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Utils.Observing.SubjectProperties;
+using Zenject;
 
 namespace Game.Battles
 {
@@ -19,57 +21,91 @@ namespace Game.Battles
     private GameObject _deadView;
 
     [SerializeField]
-    private Image _hpSlider;
+    private TextMeshProUGUI _hpValue;
+
+    [SerializeField]
+    private TextMeshProUGUI _atkValue;
+
+    [SerializeField]
+    private Transform _hpContainer;
+
+    [SerializeField]
+    private Transform _atkContainer;
 
     [SerializeField]
     private CanvasGroup _canvasGroup;
-
+    
     [SerializeField]
     private List<SpriteRenderer> _renderers;
-    
+
     [SerializeField]
     private List<SpriteMask> _masks;
-    
-    public void SetSprite(Sprite sprite)
+
+    private IAssetProvider _assets;
+    private CombatantData _combatant;
+    private int _prevHp;
+    private int _prevAtk;
+
+    [Inject]
+    private void Construct(IAssetProvider assets)
     {
-      foreach (SpriteRenderer spriteRenderer in _renderers) 
+      _assets = assets;
+    }
+
+    public void SetUp(CombatantData combatant)
+    {
+      _combatant = combatant;
+
+      Sprite sprite = _assets.LoadAsset<Sprite>(combatant.SpritePath);
+
+      foreach (SpriteRenderer spriteRenderer in _renderers)
         spriteRenderer.sprite = sprite;
 
       foreach (SpriteMask mask in _masks)
         mask.sprite = sprite;
+
+      _prevHp = _combatant.Stats.Hp;
+      _prevAtk = _combatant.Stats.Atk;
+      _hpValue.text = _combatant.Stats.Hp.ToString();
+      _atkValue.text = _combatant.Stats.Atk.ToString();
     }
 
-    private void Start()
-    {
-      _canvasGroup.alpha = 0;
-    }
-
-    public void OnAttack()
-    {
+    public void OnAttack() =>
       _renderer.sortingOrder = 1;
-      FadeCanvasGroup();
-    }
 
-    public void OnHome()
-    {
+    public void OnHome() =>
       _renderer.sortingOrder = 0;
-      _canvasGroup.alpha = 1;
-    }
 
     public void OnDead()
     {
+      _canvasGroup.alpha = 0;
       _defaultView.SetActive(false);
       _deadView.SetActive(true);
-      _canvasGroup.alpha = 0f;
     }
 
-    public void OnGetHit(SubjectInt hp)
+    public async UniTask OnGetHit() =>
+      await UpdateStats();
+
+    public async UniTask UpdateStats()
     {
-      _canvasGroup.alpha = 1;
-      _hpSlider.fillAmount = hp.Value / (float) hp.Max;
+      await UniTask.WhenAll(
+        UpdateStat(_prevHp, _combatant.Stats.Hp, _hpValue, _hpContainer),
+        UpdateStat(_prevAtk, _combatant.Stats.Atk, _atkValue, _atkContainer));
+
+      _prevHp = _combatant.Stats.Hp;
+      _prevAtk = _combatant.Stats.Atk;
     }
 
-    private void FadeCanvasGroup() =>
-      _canvasGroup.DOFade(0, 0.1f).WithCancellation(_canvasGroup.GetCancellationTokenOnDestroy());
+    private async UniTask UpdateStat(int prev, int current, TextMeshProUGUI text, Transform container)
+    {
+      if (prev == current)
+        return;
+
+      text.text = current.ToString();
+      await container.DOScale(1.3f, 0.2f)
+                     .SetEase(Ease.InExpo)
+                     .SetLoops(2, LoopType.Yoyo)
+                     .WithCancellation(text.GetCancellationTokenOnDestroy());
+    }
   }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Game.Battles.Reactions;
 using Game.Dialogues;
 using Game.Infrastructure.AssetsManagement;
-using Utils.Observing.SubjectProperties;
 
 namespace Game.Battles
 {
@@ -11,7 +10,7 @@ namespace Game.Battles
   {
     public static CombatantData FirstHero => new()
     {
-      Stats = new CombatantStats { Attack = 1, Hp = new SubjectInt(1, min: 0, max: 3) },
+      Stats = new CombatantStats { Atk = 1, Hp = 1 },
       Reactions = new List<IReaction>
       {
         new SummonOnDeath(),
@@ -24,7 +23,7 @@ namespace Game.Battles
 
     public static CombatantData CatHero => new()
     {
-      Stats = new CombatantStats { Attack = 1, Hp = new SubjectInt(2, min: 0, max: 3) },
+      Stats = new CombatantStats { Atk = 1, Hp = 2 },
       Reactions = new List<IReaction>
       {
         new DialogueOnTurnStarted(DialoguesList.First)
@@ -35,7 +34,7 @@ namespace Game.Battles
 
     public static CombatantData ElfHero => new()
     {
-      Stats = new CombatantStats { Attack = 1, Hp = new SubjectInt(2, min: 0, max: 3) },
+      Stats = new CombatantStats { Atk = 1, Hp = 2 },
       Reactions = new List<IReaction>
       {
         new DialogueOnTurnStarted(DialoguesList.First)
@@ -46,7 +45,7 @@ namespace Game.Battles
 
     public static CombatantData KnightHero => new()
     {
-      Stats = new CombatantStats { Attack = 1, Hp = new SubjectInt(2, min: 0, max: 3) },
+      Stats = new CombatantStats { Atk = 1, Hp = 2 },
       Reactions = new List<IReaction>
       {
         new DialogueOnTurnStarted(DialoguesList.First)
@@ -57,7 +56,7 @@ namespace Game.Battles
 
     public static CombatantData DefaultEnemy => new()
     {
-      Stats = new CombatantStats { Attack = 1, Hp = new SubjectInt(5, 0, 5) },
+      Stats = new CombatantStats { Atk = 1, Hp = 5 },
       Reactions = new List<IReaction>(),
       Tags = new Dictionary<Type, ICombatantTag> { }
     };

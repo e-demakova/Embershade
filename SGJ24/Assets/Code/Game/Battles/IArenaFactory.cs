@@ -35,17 +35,21 @@ namespace Game.Battles
     private void CreateHero()
     {
       CombatantData hero = ArenaData.Combatants[CombatantType.Hero];
-      
-      hero.Instance =
-        _builders.FromResources(Assets.Hero).At(new Vector3(-2.5f, -2.5f, 8f))
-                 .Instantiate<CombatantView>()
-                 .SetUp(_assets.LoadAsset<Sprite>(hero.SpritePath));
+
+      hero.Instance = _builders.FromResources(Assets.Hero)
+                               .At(new Vector3(-2.5f, -2.5f, 8f))
+                               .Instantiate<CombatantView>()
+                               .SetUp(hero);
     }
 
     private void CreateEnemy()
     {
       CombatantData enemy = ArenaData.Combatants[CombatantType.Enemy] = CombatantsList.DefaultEnemy;
-      enemy.Instance = _builders.FromResources(Assets.Enemy).At(new Vector3(2.5f, -2.5f, 8f)).Instantiate<CombatantView>();
+
+      enemy.Instance = _builders.FromResources(Assets.Enemy)
+                                .At(new Vector3(2.5f, -2.5f, 8f))
+                                .Instantiate<CombatantView>()
+                                .SetUp(enemy);
     }
   }
 }

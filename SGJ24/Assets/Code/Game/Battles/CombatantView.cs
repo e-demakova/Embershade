@@ -1,15 +1,11 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Utils.Observing.SubjectProperties;
 
 namespace Game.Battles
 {
   public class CombatantView : MonoBehaviour
   {
-    [FormerlySerializedAs("rendering")]
-    [FormerlySerializedAs("_view")]
     [SerializeField]
     private CombatantRendering _rendering;
     
@@ -21,16 +17,16 @@ namespace Game.Battles
     private void Start() =>
       _homePosition = transform.position;
 
-    public CombatantView SetUp(Sprite sprite)
+    public CombatantView SetUp(CombatantData combatant)
     {
-      _rendering.SetSprite(sprite);
+      _rendering.SetUp(combatant);
       return this;
     }
     
-    public async UniTask GetHit(SubjectInt hp)
+    public async UniTask GetHit()
     {
-      _rendering.OnGetHit(hp);
       await transform.DOShakePosition(0.1f, new Vector3(0.5f, 0, 0)).WithCancellation(this.GetCancellationTokenOnDestroy());
+      await _rendering.OnGetHit();
       await UniTask.WaitForSeconds(0.2f);
     }
 
@@ -46,6 +42,9 @@ namespace Game.Battles
       await Move(_homePosition);
       _rendering.OnHome();
     }
+
+    public async UniTask UpdateStats() =>
+      await _rendering.UpdateStats();
 
     public async UniTask MoveToTarget(CombatantView target)
     {

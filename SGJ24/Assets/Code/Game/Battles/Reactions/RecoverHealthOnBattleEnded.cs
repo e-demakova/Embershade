@@ -25,7 +25,7 @@ namespace Game.Battles.Reactions
     {
       _availableExecutions--;
       foreach (CombatantData combatant in _data.Get<ArenaData>().Combatants.Values.Where(x => x.Is<MainHeroTag>(out _)))
-        combatant.Stats.Hp.Value = combatant.Stats.Hp.Max;
+        combatant.Stats.Hp += 1;
     }
   }
 }
