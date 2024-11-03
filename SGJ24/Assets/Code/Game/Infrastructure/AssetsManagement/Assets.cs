@@ -8,9 +8,13 @@
     
     //combatants
     public const string Combatant = "Battle/combatant";
-    public const string Enemy = "Battle/Sprites/enemy";
-    public const string EnemyOne = "Battle/Sprites/enemy2";
-    public const string EnemyTwo = "Battle/Sprites/enemy3";
+    
+    public const string Witch = "Battle/Sprites/witch";
+    public const string CatEnemy = "Battle/Sprites/catenemy";
+    public const string Goat = "Battle/Sprites/goat";
+    public const string Scarecrow = "Battle/Sprites/scarecrow";
+    public const string Heads = "Battle/Sprites/heads";
+    
     public const string HeroDefault = "Battle/Sprites/hero";
     public const string HeroCat = "Battle/Sprites/cat";
     public const string HeroElf = "Battle/Sprites/elf";
@@ -18,8 +22,11 @@
     
     //cards
     public const string CardEye = "Cards/eye";
+    public const string CardEyeTrash = "Cards/eye-trash";
     public const string CardCake = "Cards/cake";
+    public const string CardCakeTrash = "Cards/cake-trash";
     public const string CardFinger = "Cards/finger";
+    public const string CardFingerTrash = "Cards/finger-trash";
     
     public const string Support = "Battle/support";
     public const string SupportAppear = "Battle/support-appear";

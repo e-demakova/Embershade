@@ -48,6 +48,15 @@ namespace Input
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""LoadArena"",
+                    ""type"": ""Button"",
+                    ""id"": ""54e2f120-7f5b-4558-b6c0-3dfdca87892e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""AddSouls"",
                     ""type"": ""Button"",
                     ""id"": ""a3a2f70a-d885-44aa-bb8e-3b237c5c5e64"",
@@ -88,6 +97,17 @@ namespace Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AddSouls"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8c8773c6-8758-4bb8-b5b5-b4db2ecc4be1"",
+                    ""path"": ""<Keyboard>/b"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LoadArena"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -677,6 +697,7 @@ namespace Input
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Act = m_Player.FindAction("Act", throwIfNotFound: true);
             m_Player_LoadShop = m_Player.FindAction("LoadShop", throwIfNotFound: true);
+            m_Player_LoadArena = m_Player.FindAction("LoadArena", throwIfNotFound: true);
             m_Player_AddSouls = m_Player.FindAction("AddSouls", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -759,6 +780,7 @@ namespace Input
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Act;
         private readonly InputAction m_Player_LoadShop;
+        private readonly InputAction m_Player_LoadArena;
         private readonly InputAction m_Player_AddSouls;
         public struct PlayerActions
         {
@@ -766,6 +788,7 @@ namespace Input
             public PlayerActions(@Actions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Act => m_Wrapper.m_Player_Act;
             public InputAction @LoadShop => m_Wrapper.m_Player_LoadShop;
+            public InputAction @LoadArena => m_Wrapper.m_Player_LoadArena;
             public InputAction @AddSouls => m_Wrapper.m_Player_AddSouls;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
@@ -782,6 +805,9 @@ namespace Input
                 @LoadShop.started += instance.OnLoadShop;
                 @LoadShop.performed += instance.OnLoadShop;
                 @LoadShop.canceled += instance.OnLoadShop;
+                @LoadArena.started += instance.OnLoadArena;
+                @LoadArena.performed += instance.OnLoadArena;
+                @LoadArena.canceled += instance.OnLoadArena;
                 @AddSouls.started += instance.OnAddSouls;
                 @AddSouls.performed += instance.OnAddSouls;
                 @AddSouls.canceled += instance.OnAddSouls;
@@ -795,6 +821,9 @@ namespace Input
                 @LoadShop.started -= instance.OnLoadShop;
                 @LoadShop.performed -= instance.OnLoadShop;
                 @LoadShop.canceled -= instance.OnLoadShop;
+                @LoadArena.started -= instance.OnLoadArena;
+                @LoadArena.performed -= instance.OnLoadArena;
+                @LoadArena.canceled -= instance.OnLoadArena;
                 @AddSouls.started -= instance.OnAddSouls;
                 @AddSouls.performed -= instance.OnAddSouls;
                 @AddSouls.canceled -= instance.OnAddSouls;
@@ -982,6 +1011,7 @@ namespace Input
         {
             void OnAct(InputAction.CallbackContext context);
             void OnLoadShop(InputAction.CallbackContext context);
+            void OnLoadArena(InputAction.CallbackContext context);
             void OnAddSouls(InputAction.CallbackContext context);
         }
         public interface IUIActions

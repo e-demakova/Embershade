@@ -14,7 +14,7 @@ namespace Game.Battles
     public readonly Dictionary<CombatantType, CombatantData> Combatants = new()
     {
       { CombatantType.Hero, CombatantsList.FirstHero },
-      { CombatantType.Enemy, CombatantsList.DefaultEnemy },
+      { CombatantType.Enemy, CombatantsList.Witch },
     };
 
     public Queue<CombatantData> EnemiesQueue = new();
@@ -31,9 +31,11 @@ namespace Game.Battles
     public void ResetQueue()
     {
       EnemiesQueue.Clear();
-      EnemiesQueue.Enqueue(CombatantsList.DefaultEnemy);
-      EnemiesQueue.Enqueue(CombatantsList.EnemyOne);
-      EnemiesQueue.Enqueue(CombatantsList.EnemyTwo);
+      EnemiesQueue.Enqueue(CombatantsList.Witch);
+      EnemiesQueue.Enqueue(CombatantsList.CatEnemy);
+      EnemiesQueue.Enqueue(CombatantsList.Goat);
+      EnemiesQueue.Enqueue(CombatantsList.Heads);
+      EnemiesQueue.Enqueue(CombatantsList.Scarecrow);
     }
   }
 }

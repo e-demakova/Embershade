@@ -30,6 +30,7 @@ namespace Game
 
       _input.OnLoadShop.Down().Subscribe(LoadShop).AddTo(_subscribers);
       _input.OnAddSouls.Down().Subscribe(AddSouls).AddTo(_subscribers);
+      _input.OnLoadArena.Down().Subscribe(LoadArena).AddTo(_subscribers);
     }
 
     public void Dispose() =>
@@ -40,5 +41,8 @@ namespace Game
 
     private void LoadShop() =>
       _stateMachine.Enter<LoadShopState>();
+    
+    private void LoadArena() =>
+      _stateMachine.Enter<LoadArenaState>();
   }
 }

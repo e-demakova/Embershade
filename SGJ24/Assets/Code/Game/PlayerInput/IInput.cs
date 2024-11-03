@@ -11,6 +11,7 @@ namespace Game.PlayerInput
     Actions.PlayerActions Main { get; }
     ISubscriber<InputContext> OnAct { get; }
     ISubscriber<InputContext> OnLoadShop { get; }
+    ISubscriber<InputContext> OnLoadArena { get; }
     ISubscriber<InputContext> OnAddSouls { get; }
   }
 }

@@ -58,30 +58,48 @@ namespace Game.Battles
       Souls = 4
     };
 
-    public static CombatantData DefaultEnemy => new()
+    public static CombatantData Witch => new()
     {
       Stats = new CombatantStats { Atk = 1, Hp = 3 },
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
-      SpritePath = Assets.Enemy,
+      SpritePath = Assets.Witch,
       Souls = 2
     };
 
-    public static CombatantData EnemyOne => new()
+    public static CombatantData CatEnemy => new()
     {
       Stats = new CombatantStats { Atk = 2, Hp = 5 },
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
-      SpritePath = Assets.EnemyOne,
+      SpritePath = Assets.CatEnemy,
       Souls = 2
     };
 
-    public static CombatantData EnemyTwo => new()
+    public static CombatantData Goat => new()
     {
       Stats = new CombatantStats { Atk = 4, Hp = 5 },
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
-      SpritePath = Assets.EnemyTwo,
+      SpritePath = Assets.Goat,
+      Souls = 2
+    }; 
+    
+    public static CombatantData Heads => new()
+    {
+      Stats = new CombatantStats { Atk = 4, Hp = 5 },
+      Reactions = new List<IReaction> { new DropSoulsOnDeath() },
+      Tags = new Dictionary<Type, ICombatantTag> { },
+      SpritePath = Assets.Heads,
+      Souls = 2
+    };
+    
+    public static CombatantData Scarecrow => new()
+    {
+      Stats = new CombatantStats { Atk = 4, Hp = 5 },
+      Reactions = new List<IReaction> { new DropSoulsOnDeath() },
+      Tags = new Dictionary<Type, ICombatantTag> { },
+      SpritePath = Assets.Scarecrow,
       Souls = 2
     };
   }

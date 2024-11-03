@@ -36,9 +36,9 @@ namespace Game.Cards
 
     public static CardData EyeTrash => new()
     {
-      BuyCost = 0,
+      BuyCost = 1,
       SellCost = 0,
-      SpritePath = Assets.CardEye,
+      SpritePath = Assets.CardEyeTrash,
       Spell = new DecreaseEnemyAtkSpell(0)
     };
 
@@ -68,9 +68,9 @@ namespace Game.Cards
 
     public static CardData FingerTrash => new()
     {
-      BuyCost = 0,
+      BuyCost = 1,
       SellCost = 0,
-      SpritePath = Assets.CardFinger,
+      SpritePath = Assets.CardFingerTrash,
       Spell = new IncreaseAtkSpell(0)
     };
 
@@ -92,9 +92,9 @@ namespace Game.Cards
     
     public static CardData CakeTrash => new()
     {
-      BuyCost = 0,
+      BuyCost = 1,
       SellCost = 0,
-      SpritePath = Assets.CardCake,
+      SpritePath = Assets.CardCakeTrash,
       Spell = new IncreaseHpSpell(0)
     };
     

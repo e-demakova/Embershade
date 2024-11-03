@@ -24,6 +24,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "LoadArena",
+                    "type": "Button",
+                    "id": "54e2f120-7f5b-4558-b6c0-3dfdca87892e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "AddSouls",
                     "type": "Button",
                     "id": "a3a2f70a-d885-44aa-bb8e-3b237c5c5e64",
@@ -64,6 +73,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "AddSouls",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8c8773c6-8758-4bb8-b5b5-b4db2ecc4be1",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LoadArena",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

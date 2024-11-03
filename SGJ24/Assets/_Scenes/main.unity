@@ -1808,9 +1808,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.37136507, g: 0, b: 0.90188676, a: 0.59607846}
-    m_HighlightedColor: {r: 0.7042977, g: 0.18679237, b: 1, a: 0.59607846}
-    m_PressedColor: {r: 0.4117647, g: 0, b: 1, a: 0.14901961}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.45490196}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8509804}
+    m_PressedColor: {r: 0.4117647, g: 0, b: 1, a: 0.57254905}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0}
     m_ColorMultiplier: 1
@@ -1851,7 +1851,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 1bf532a663a4aaa4ca1e454b7d3108c3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1904,7 +1904,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -10, y: -10}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2050462607
 MonoBehaviour:
@@ -2168,7 +2168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 692223636381198823, guid: 08eb76265484a6742bcec5f404fe3723, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 193.62
       objectReference: {fileID: 0}
     - target: {fileID: 692223636381198823, guid: 08eb76265484a6742bcec5f404fe3723, type: 3}
       propertyPath: m_SizeDelta.y
@@ -2248,7 +2248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 934760396748597922, guid: 08eb76265484a6742bcec5f404fe3723, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 54.99994
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 934760396748597922, guid: 08eb76265484a6742bcec5f404fe3723, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

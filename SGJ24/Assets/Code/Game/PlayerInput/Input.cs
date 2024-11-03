@@ -29,6 +29,7 @@ namespace Game.PlayerInput
     public Actions.PlayerActions Main => _actions.Player;
     public ISubscriber<InputContext> OnAct => OnAction(Main.Act);
     public ISubscriber<InputContext> OnLoadShop => OnAction(Main.LoadShop);
+    public ISubscriber<InputContext> OnLoadArena => OnAction(Main.LoadArena);
     public ISubscriber<InputContext> OnAddSouls => OnAction(Main.AddSouls);
 
     public EventSystem EventSystem =>
