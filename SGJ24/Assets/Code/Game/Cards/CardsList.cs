@@ -10,14 +10,16 @@ namespace Game.Cards
     {
       BuyCost = 1,
       SpritePath = Assets.CardHand,
-      Description = DescriptionsList.Hand
+      Description = DescriptionsList.Hand,
+      Spells = { new DecreaseEnemyAtkSpell(1) }
     };
 
     public static CardData Knife => new()
     {
       BuyCost = 1,
       SpritePath = Assets.CardKnife,
-      Description = DescriptionsList.Atk
+      Description = DescriptionsList.Atk,
+      Spells = { new IncreaseAtkSpell(1) }
     };
 
     public static CardData Heart => new()

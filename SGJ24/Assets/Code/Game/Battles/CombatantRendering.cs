@@ -4,13 +4,15 @@ using DG.Tweening;
 using Game.Infrastructure.AssetsManagement;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Game.Battles
 {
   public class CombatantRendering : MonoBehaviour
   {
+    [SerializeField]
+    private ParticleSystem _particle;
+
     [SerializeField]
     private SpriteRenderer _renderer;
 
@@ -34,7 +36,7 @@ namespace Game.Battles
 
     [SerializeField]
     private CanvasGroup _canvasGroup;
-    
+
     [SerializeField]
     private List<SpriteRenderer> _renderers;
 
@@ -56,18 +58,8 @@ namespace Game.Battles
     {
       _combatant = combatant;
 
-      Sprite sprite = _assets.LoadAsset<Sprite>(combatant.SpritePath);
-
-      foreach (SpriteRenderer spriteRenderer in _renderers)
-        spriteRenderer.sprite = sprite;
-
-      foreach (SpriteMask mask in _masks)
-        mask.sprite = sprite;
-
-      _prevHp = _combatant.Stats.Hp;
-      _prevAtk = _combatant.Stats.Atk;
-      _hpValue.text = _combatant.Stats.Hp.ToString();
-      _atkValue.text = _combatant.Stats.Atk.ToString();
+      SetUpSprite();
+      SetUpStats();
     }
 
     public void OnAttack() =>
@@ -105,8 +97,28 @@ namespace Game.Battles
                      .SetEase(Ease.InExpo)
                      .SetLoops(2, LoopType.Yoyo)
                      .WithCancellation(text.GetCancellationTokenOnDestroy());
-      
+
       text.text = current.ToString();
+    }
+
+    private void SetUpSprite()
+    {
+      Sprite sprite = _assets.LoadAsset<Sprite>(_combatant.SpritePath);
+
+      _particle.textureSheetAnimation.SetSprite(0, sprite);
+      foreach (SpriteRenderer spriteRenderer in _renderers)
+        spriteRenderer.sprite = sprite;
+
+      foreach (SpriteMask mask in _masks)
+        mask.sprite = sprite;
+    }
+
+    private void SetUpStats()
+    {
+      _prevHp = _combatant.Stats.Hp;
+      _prevAtk = _combatant.Stats.Atk;
+      _hpValue.text = _combatant.Stats.Hp.ToString();
+      _atkValue.text = _combatant.Stats.Atk.ToString();
     }
   }
 }

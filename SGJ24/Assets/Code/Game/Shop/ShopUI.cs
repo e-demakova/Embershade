@@ -9,7 +9,7 @@ using Zenject;
 
 namespace Game.Shop
 {
-  public class ShopUI : MonoBehaviour
+  public class ShopUI : ControllableMono<ShopUI>
   {
     [SerializeField]
     private TextMeshProUGUI _wallet;
@@ -26,14 +26,12 @@ namespace Game.Shop
     [SerializeField]
     private List<HeroUI> _heroes;
 
-    [SerializeField]
-    private InventoryUI _inventory;
-    
     private IGameData _data;
     private IGameStateMachine _stateMachine;
 
     private SoulsData Souls => _data.Get<SoulsData>();
     private ArenaData Arena => _data.Get<ArenaData>();
+    private InventoryUI InventoryUI => _data.Get<SceneData>().Get<InventoryUI>();
     private InventoryData Inventory => _data.Get<InventoryData>();
 
     [Inject]
@@ -43,8 +41,9 @@ namespace Game.Shop
       _stateMachine = stateMachine;
     }
 
-    private void Start()
+    protected override void Start()
     {
+      base.Start();
       UpdateWalletUI();
 
       if (Arena.Combatants[CombatantType.Hero].IsDead)
@@ -65,7 +64,7 @@ namespace Game.Shop
     private void ShowCards()
     {
       _cardsContainer.SetActive(true);
-      
+
       _cards[0].SetUp(CardsList.Hand, this);
       _cards[1].SetUp(CardsList.Heart, this);
       _cards[2].SetUp(CardsList.Knife, this);
@@ -75,7 +74,9 @@ namespace Game.Shop
     {
       Inventory.Clear();
       Arena.Combatants[CombatantType.Hero] = combatant;
-      _stateMachine.Enter<LoadArenaState>();
+      Arena.ResetQueue();
+      Souls.InWallet = combatant.Souls;
+      _stateMachine.Enter<LoadShopState>();
     }
 
     public bool CanBuy(CardData card) =>
@@ -86,10 +87,18 @@ namespace Game.Shop
       Souls.InWallet -= card.BuyCost;
       UpdateWalletUI();
       Inventory.Add(card);
-      _inventory.UpdateView();
-      
-      foreach (CardUI cardUI in _cards) 
+      InventoryUI.UpdateView();
+
+      foreach (CardUI cardUI in _cards)
         cardUI.UpdateCostView();
+    }
+
+    public void SellCard(CardData card)
+    {
+      Souls.InWallet += card.SellCost;
+      Inventory.Remove(card);
+      UpdateWalletUI();
+      InventoryUI.UpdateView();
     }
 
     private void UpdateWalletUI() =>

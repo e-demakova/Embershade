@@ -18,6 +18,15 @@ namespace Game.Infrastructure.Data
       return null;
     }
 
+    public bool TryGet<T>(out T t) where T : ControllableMono<T>, new()
+    {
+      t = _behaviours.TryGetValue(typeof(T), out MonoBehaviour mono)
+        ? mono as T
+        : null;
+
+      return t != null;
+    }
+
     public void Register<T>(ControllableMono<T> mono) where T : ControllableMono<T>
     {
       if (_behaviours.ContainsKey(typeof(T)))

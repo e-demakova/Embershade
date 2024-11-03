@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Game.Cards
 {
-  public class InventoryUI : MonoBehaviour
+  public class InventoryUI : ControllableMono<InventoryUI>
   {
     [SerializeField]
     private List<InventorySlotUI> _slots;
@@ -19,18 +19,34 @@ namespace Game.Cards
       _data = data;
     }
 
-    private void Start() =>
+    protected override void Start()
+    {
+      base.Start();
       UpdateView();
+    }
 
     public void UpdateView()
     {
       List<CardData> cards = _data.Get<InventoryData>().Cards;
-      
-      for (int i = 0; i < cards.Count; i++) 
+      if (cards.Count == 0)
+      {
+        Hide();
+        return;
+      }
+
+      gameObject.SetActive(true);
+
+      for (int i = 0; i < cards.Count; i++)
         _slots[i].SetUp(cards[i]);
 
-      for (int i = cards.Count; i < _slots.Count; i++) 
+      for (int i = cards.Count; i < _slots.Count; i++)
         _slots[i].Clear();
     }
+
+    public void Show() =>
+      UpdateView();
+
+    public void Hide() =>
+      gameObject.SetActive(false);
   }
 }

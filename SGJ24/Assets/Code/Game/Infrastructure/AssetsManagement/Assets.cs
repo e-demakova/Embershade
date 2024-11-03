@@ -9,6 +9,8 @@
     //combatants
     public const string Combatant = "Battle/combatant";
     public const string Enemy = "Battle/Sprites/enemy";
+    public const string EnemyOne = "Battle/Sprites/enemy2";
+    public const string EnemyTwo = "Battle/Sprites/enemy3";
     public const string HeroDefault = "Battle/Sprites/hero";
     public const string HeroCat = "Battle/Sprites/cat";
     public const string HeroElf = "Battle/Sprites/elf";

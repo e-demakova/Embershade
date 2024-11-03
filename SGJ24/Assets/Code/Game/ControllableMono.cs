@@ -13,7 +13,7 @@ namespace Game
     private void Construct(IGameData gameData) =>
       _gameData = gameData;
 
-    private void Start() =>
+    protected virtual void Start() =>
       SceneData.Register(this);
 
     private void OnDestroy() =>

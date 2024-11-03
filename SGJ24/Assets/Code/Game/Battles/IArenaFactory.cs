@@ -42,8 +42,8 @@ namespace Game.Battles
 
     private void CreateEnemy()
     {
-      CombatantData enemy = ArenaData.Combatants[CombatantType.Enemy] = CombatantsList.DefaultEnemy;
-
+      CombatantData enemy = ArenaData.Combatants[CombatantType.Enemy] = ArenaData.GetNextEnemy();
+      
       enemy.Instance = _builders.FromResources(Assets.Combatant)
                                 .At(new Vector3(2.5f, -2.5f, 8f))
                                 .Instantiate<CombatantView>()

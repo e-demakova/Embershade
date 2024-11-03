@@ -3,6 +3,7 @@ using Game.Battles.Triggers;
 using Game.Dialogues;
 using Game.Infrastructure.AssetsManagement;
 using Game.Infrastructure.Data;
+using Game.Shop;
 using Zenject;
 
 namespace Game.Battles.Reactions
@@ -30,21 +31,23 @@ namespace Game.Battles.Reactions
     {
       _availableExecutions--;
 
-      await Dialogues.HideBack();
-      
-      _data.Get<SceneData>().Get<MainCamera>().ZoomOut().Forget();
-      
+      _data.Get<SoulsData>().InWallet = owner.Souls;
+
+      await UniTask.WhenAll(
+        Dialogues.HideBack(),
+        _data.Get<SceneData>().Get<MainCamera>().ZoomOut());
+
       ArenaData.SupportArrived = true;
-      
-      foreach (CombatantData combatant in _data.Get<ArenaData>().Combatants.Values) 
+
+      foreach (CombatantData combatant in _data.Get<ArenaData>().Combatants.Values)
         combatant.Instance.gameObject.SetActive(false);
-      
+
       await Dialogues.ShowCentredDialogue(DialoguesList.FirstDeath);
-      
+
       _builders.FromResources(Assets.SupportAppear).Instantiate();
-      
+
       await Dialogues.ShowBack();
-      
+
       await UniTask.WaitForSeconds(1f);
       await _data.Get<SceneData>().Get<DialogueUI>().ShowSmileDialogue(DialoguesList.SmileFirst);
     }

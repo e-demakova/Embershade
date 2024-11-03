@@ -26,6 +26,7 @@ namespace Game.Battles
 
     private List<CombatantData> Combatants => _data.Get<ArenaData>().Combatants.Values.ToList();
     private BattleUI BattleUI => _data.Get<SceneData>().Get<BattleUI>();
+    private InventoryUI InventoryUI => _data.Get<SceneData>().Get<InventoryUI>();
     private MainCamera MainCamera => _data.Get<SceneData>().Get<MainCamera>();
 
     public Arena(IGameData data, IGameStateMachine stateMachine, IReactionsInvoker invoker, ISpellApplier spellApplier)
@@ -38,7 +39,9 @@ namespace Game.Battles
 
     public void Run() =>
       Postponer.Do(BattleUI.Hide)
+               .Do(InventoryUI.Hide)
                .Wait(() => React(new BattleStartedTrigger()))
+               .Do(InventoryUI.Show)
                .Wait(ApplyCards)
                .Do(BattleUI.Show);
 
@@ -47,6 +50,7 @@ namespace Game.Battles
       PostponedSequence sequence = Postponer.Sequence();
 
       sequence.Do(BattleUI.Hide)
+              .Do(InventoryUI.Hide)
               .Wait(MainCamera.ZoomIn)
               .Wait(() => React(new TurnStartedTrigger()));
 
@@ -94,10 +98,15 @@ namespace Game.Battles
         await React(new BattleEndTrigger());
         RevertCards();
       }
+      else if (GameSettings.AutoBattle)
+      {
+        RunTurn();
+      }
       else
       {
         await MainCamera.ZoomOut();
         BattleUI.Show();
+        InventoryUI.Show();
       }
     }
 

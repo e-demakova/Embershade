@@ -18,7 +18,8 @@ namespace Game.Battles
         new DialogueOnTurnStarted(DialoguesList.First)
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
-      SpritePath = Assets.HeroDefault
+      SpritePath = Assets.HeroDefault,
+      Souls = 4
     };
 
     public static CombatantData CatHero => new()
@@ -29,7 +30,8 @@ namespace Game.Battles
         new DialogueOnTurnStarted(DialoguesList.First)
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
-      SpritePath = Assets.HeroCat
+      SpritePath = Assets.HeroCat,
+      Souls = 4
     };
 
     public static CombatantData ElfHero => new()
@@ -40,7 +42,8 @@ namespace Game.Battles
         new DialogueOnTurnStarted(DialoguesList.First)
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
-      SpritePath = Assets.HeroElf
+      SpritePath = Assets.HeroElf,
+      Souls = 4
     };
 
     public static CombatantData KnightHero => new()
@@ -51,7 +54,8 @@ namespace Game.Battles
         new DialogueOnTurnStarted(DialoguesList.First)
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
-      SpritePath = Assets.HeroKnight
+      SpritePath = Assets.HeroKnight,
+      Souls = 4
     };
 
     public static CombatantData DefaultEnemy => new()
@@ -59,7 +63,26 @@ namespace Game.Battles
       Stats = new CombatantStats { Atk = 1, Hp = 5 },
       Reactions = new List<IReaction>(),
       Tags = new Dictionary<Type, ICombatantTag> { },
-      SpritePath = Assets.Enemy
+      SpritePath = Assets.Enemy,
+      Souls = 2
+    }; 
+    
+    public static CombatantData EnemyOne => new()
+    {
+      Stats = new CombatantStats { Atk = 1, Hp = 5 },
+      Reactions = new List<IReaction>(),
+      Tags = new Dictionary<Type, ICombatantTag> { },
+      SpritePath = Assets.EnemyOne,
+      Souls = 2
+    }; 
+    
+    public static CombatantData EnemyTwo => new()
+    {
+      Stats = new CombatantStats { Atk = 1, Hp = 5 },
+      Reactions = new List<IReaction>(),
+      Tags = new Dictionary<Type, ICombatantTag> { },
+      SpritePath = Assets.EnemyTwo,
+      Souls = 2
     };
   }
 }

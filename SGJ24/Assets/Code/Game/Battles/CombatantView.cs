@@ -54,6 +54,11 @@ namespace Game.Battles
       await Move(position);
     }
 
+    public async UniTask DropSouls()
+    {
+      
+    }
+
     private UniTask Move(Vector3 to) =>
       transform.DOMove(to, Durations.CombatantMove).SetEase(_ease)
                .WithCancellation(this.GetCancellationTokenOnDestroy());

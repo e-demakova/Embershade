@@ -4,6 +4,6 @@ namespace Game.Shop
 {
   public class SoulsData : IData
   {
-    public int InWallet = 5;
+    public int InWallet;
   }
 }

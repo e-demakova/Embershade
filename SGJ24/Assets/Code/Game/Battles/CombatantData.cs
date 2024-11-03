@@ -11,6 +11,7 @@ namespace Game.Battles
   {
     public CombatantView Instance;
     public CombatantStats Stats;
+    public int Souls = 1;
     
     public string SpritePath;
     public LocalizedString Description = DescriptionsList.Default;

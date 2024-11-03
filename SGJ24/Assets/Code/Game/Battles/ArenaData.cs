@@ -13,10 +13,26 @@ namespace Game.Battles
   {
     public readonly Dictionary<CombatantType, CombatantData> Combatants = new()
     {
-      { CombatantType.Hero, Battles.CombatantsList.FirstHero },
-      { CombatantType.Enemy, Battles.CombatantsList.DefaultEnemy },
+      { CombatantType.Hero, CombatantsList.FirstHero },
+      { CombatantType.Enemy, CombatantsList.DefaultEnemy },
     };
 
+    public Queue<CombatantData> EnemiesQueue = new();
     public bool SupportArrived { get; set; }
+
+    public CombatantData GetNextEnemy()
+    {
+      if (EnemiesQueue.Count == 0)
+        ResetQueue();
+      
+      return EnemiesQueue.Dequeue();
+    }
+
+    public void ResetQueue()
+    {
+      EnemiesQueue.Enqueue(CombatantsList.DefaultEnemy);
+      EnemiesQueue.Enqueue(CombatantsList.EnemyOne);
+      EnemiesQueue.Enqueue(CombatantsList.EnemyTwo);
+    }
   }
 }
