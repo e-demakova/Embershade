@@ -19,9 +19,10 @@ namespace Game.Shop
     private TextMeshProUGUI _description;
     
     private CombatantData _data;
-    private ShopUI _shop;
     private IAssetProvider _assets;
     private IGameData _gameData;
+
+    private ShopUI Shop => _gameData.Get<SceneData>().Get<ShopUI>();
 
     [Inject]
     private void Construct(IAssetProvider assets, IGameData data)
@@ -30,15 +31,14 @@ namespace Game.Shop
       _gameData = data;
     }
 
-    public void SetUp(CombatantData data, ShopUI shopUI)
+    public void SetUp(CombatantData data)
     {
       _data = data;
-      _shop = shopUI;
       _image.sprite = _assets.LoadAsset<Sprite>(data.SpritePath);
       _description.text = _gameData.Get<LocalizationData>().GetString(_data.Description);
     }
     
     protected override void OnClick() =>
-      _shop.Select(_data);
+      Shop.Select(_data);
   }
 }

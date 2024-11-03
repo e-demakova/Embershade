@@ -1808,8 +1808,8 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.37136507, g: 0, b: 0.90188676, a: 0.23137255}
-    m_HighlightedColor: {r: 0.7042977, g: 0.18679237, b: 1, a: 0.29803923}
+    m_NormalColor: {r: 0.37136507, g: 0, b: 0.90188676, a: 0.59607846}
+    m_HighlightedColor: {r: 0.7042977, g: 0.18679237, b: 1, a: 0.59607846}
     m_PressedColor: {r: 0.4117647, g: 0, b: 1, a: 0.14901961}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0, g: 0, b: 0, a: 0}
@@ -1851,8 +1851,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1960,7 +1960,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2100639648
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1989,7 +1989,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100639647}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -2168,7 +2168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 692223636381198823, guid: 08eb76265484a6742bcec5f404fe3723, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 193.62
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 692223636381198823, guid: 08eb76265484a6742bcec5f404fe3723, type: 3}
       propertyPath: m_SizeDelta.y

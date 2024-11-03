@@ -39,13 +39,17 @@ namespace Game.Battles
       _spellApplier = spellApplier;
     }
 
-    public void Run() =>
+    public void Run()
+    {
+      _data.Get<ProgressData>().Level++;
+      
       Postponer.Do(BattleUI.Hide)
                .Do(InventoryUI.Hide)
                .Wait(() => React(new BattleStartedTrigger()))
                .Do(InventoryUI.Show)
                .Wait(ApplyCards)
                .Do(BattleUI.Show);
+    }
 
     public void RunTurn()
     {

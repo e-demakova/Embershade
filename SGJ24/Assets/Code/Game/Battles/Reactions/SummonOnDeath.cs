@@ -38,6 +38,7 @@ namespace Game.Battles.Reactions
         _data.Get<SceneData>().Get<MainCamera>().ZoomOut());
 
       ArenaData.SupportArrived = true;
+      ArenaData.ResetQueue();
 
       foreach (CombatantData combatant in _data.Get<ArenaData>().Combatants.Values)
         combatant.Instance.gameObject.SetActive(false);

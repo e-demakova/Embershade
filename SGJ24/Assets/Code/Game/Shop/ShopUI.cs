@@ -5,6 +5,7 @@ using Game.Infrastructure.Core;
 using Game.Infrastructure.Data;
 using TMPro;
 using UnityEngine;
+using Utils.Extensions;
 using Zenject;
 
 namespace Game.Shop
@@ -56,18 +57,23 @@ namespace Game.Shop
     {
       _heroesContainer.SetActive(true);
 
-      _heroes[0].SetUp(CombatantsList.CatHero, this);
-      _heroes[1].SetUp(CombatantsList.ElfHero, this);
-      _heroes[2].SetUp(CombatantsList.KnightHero, this);
+      _heroes[0].SetUp(CombatantsList.CatHero);
+      _heroes[1].SetUp(CombatantsList.ElfHero);
+      _heroes[2].SetUp(CombatantsList.KnightHero);
     }
 
     private void ShowCards()
     {
       _cardsContainer.SetActive(true);
 
-      _cards[0].SetUp(CardsList.Eye, this);
-      _cards[1].SetUp(CardsList.Cake, this);
-      _cards[2].SetUp(CardsList.Finger, this);
+      List<CardData> cards = _data.Get<ShopData>().Cards();
+      
+      foreach (CardUI cardUI in _cards)
+      {
+        CardData card = cards.Random();
+        cardUI.SetUp(card);
+        cards.Remove(card);
+      }
     }
 
     public void Select(CombatantData combatant)
@@ -75,6 +81,9 @@ namespace Game.Shop
       Inventory.Clear();
       Arena.Combatants[CombatantType.Hero] = combatant;
       Arena.ResetQueue();
+      _data.Get<ShopData>().ResetQueue();
+      _data.Get<ProgressData>().Level = 0;
+      _data.Get<ProgressData>().Run++;
       Souls.InWallet = combatant.Souls;
       _stateMachine.Enter<LoadShopState>();
     }
@@ -84,21 +93,25 @@ namespace Game.Shop
 
     public void Buy(CardData card)
     {
-      Souls.InWallet -= card.BuyCost;
-      UpdateWalletUI();
       Inventory.Add(card);
-      InventoryUI.UpdateView();
-
-      foreach (CardUI cardUI in _cards)
-        cardUI.UpdateCostView();
+      Souls.InWallet -= card.BuyCost;
+      UpdateView();
     }
 
     public void SellCard(CardData card)
     {
-      Souls.InWallet += card.SellCost;
       Inventory.Remove(card);
+      Souls.InWallet += card.SellCost;
+      UpdateView();
+    }
+
+    private void UpdateView()
+    {
       UpdateWalletUI();
       InventoryUI.UpdateView();
+
+      foreach (CardUI cardUI in _cards)
+        cardUI.UpdateCostView();
     }
 
     private void UpdateWalletUI() =>

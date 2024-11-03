@@ -10,5 +10,7 @@ namespace Game.PlayerInput
     bool Enabled { set; }
     Actions.PlayerActions Main { get; }
     ISubscriber<InputContext> OnAct { get; }
+    ISubscriber<InputContext> OnLoadShop { get; }
+    ISubscriber<InputContext> OnAddSouls { get; }
   }
 }

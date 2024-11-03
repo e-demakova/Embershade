@@ -651,10 +651,11 @@ GameObject:
   - component: {fileID: 2197480176211636026}
   - component: {fileID: 5358420751518267637}
   - component: {fileID: 680159026305755182}
-  - component: {fileID: 3610031172978500675}
   - component: {fileID: 3212754541724113412}
   - component: {fileID: 6627887889900891005}
   - component: {fileID: 7002650385854610301}
+  - component: {fileID: 2043460358761462973}
+  - component: {fileID: 3610031172978500675}
   m_Layer: 5
   m_Name: card
   m_TagString: Untagged
@@ -766,22 +767,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3610031172978500675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7632822085232412649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe627a3af15845b79de05fa0612cf847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _button: {fileID: 680159026305755182}
-  _image: {fileID: 1498811692537988066}
-  _description: {fileID: 6858417779770910964}
-  _cost: {fileID: 4408026962705642303}
 --- !u!114 &3212754541724113412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,6 +827,36 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!225 &2043460358761462973
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632822085232412649}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &3610031172978500675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7632822085232412649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe627a3af15845b79de05fa0612cf847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 680159026305755182}
+  _image: {fileID: 1498811692537988066}
+  _description: {fileID: 6858417779770910964}
+  _cost: {fileID: 4408026962705642303}
+  _soulIcon: {fileID: 6737553862514661251}
+  _canvasGroup: {fileID: 2043460358761462973}
 --- !u!1 &7637739886863194313
 GameObject:
   m_ObjectHideFlags: 0

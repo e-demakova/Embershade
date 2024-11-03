@@ -21,6 +21,7 @@ namespace Game.Infrastructure.Core
       Container.BindService<BuildersFactory>();
       Container.BindService<AssetProvider>();
       Container.BindService<AudioPlayer>();
+      Container.BindService<Cheats>();
 
       Container.BindService<Arena>();
       Container.BindService<ArenaFactory>();

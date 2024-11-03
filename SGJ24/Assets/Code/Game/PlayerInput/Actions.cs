@@ -37,6 +37,24 @@ namespace Input
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LoadShop"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2f39802-c6b3-4ded-a2f2-c63dfd3f364a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AddSouls"",
+                    ""type"": ""Button"",
+                    ""id"": ""a3a2f70a-d885-44aa-bb8e-3b237c5c5e64"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +66,28 @@ namespace Input
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Act"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e5233e6b-55a3-41d2-83da-8306ff7b2fb3"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LoadShop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""044544f4-d628-41d6-bfa8-b578e615c6d0"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddSouls"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -636,6 +676,8 @@ namespace Input
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Act = m_Player.FindAction("Act", throwIfNotFound: true);
+            m_Player_LoadShop = m_Player.FindAction("LoadShop", throwIfNotFound: true);
+            m_Player_AddSouls = m_Player.FindAction("AddSouls", throwIfNotFound: true);
             // UI
             m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
             m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -716,11 +758,15 @@ namespace Input
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Act;
+        private readonly InputAction m_Player_LoadShop;
+        private readonly InputAction m_Player_AddSouls;
         public struct PlayerActions
         {
             private @Actions m_Wrapper;
             public PlayerActions(@Actions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Act => m_Wrapper.m_Player_Act;
+            public InputAction @LoadShop => m_Wrapper.m_Player_LoadShop;
+            public InputAction @AddSouls => m_Wrapper.m_Player_AddSouls;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -733,6 +779,12 @@ namespace Input
                 @Act.started += instance.OnAct;
                 @Act.performed += instance.OnAct;
                 @Act.canceled += instance.OnAct;
+                @LoadShop.started += instance.OnLoadShop;
+                @LoadShop.performed += instance.OnLoadShop;
+                @LoadShop.canceled += instance.OnLoadShop;
+                @AddSouls.started += instance.OnAddSouls;
+                @AddSouls.performed += instance.OnAddSouls;
+                @AddSouls.canceled += instance.OnAddSouls;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -740,6 +792,12 @@ namespace Input
                 @Act.started -= instance.OnAct;
                 @Act.performed -= instance.OnAct;
                 @Act.canceled -= instance.OnAct;
+                @LoadShop.started -= instance.OnLoadShop;
+                @LoadShop.performed -= instance.OnLoadShop;
+                @LoadShop.canceled -= instance.OnLoadShop;
+                @AddSouls.started -= instance.OnAddSouls;
+                @AddSouls.performed -= instance.OnAddSouls;
+                @AddSouls.canceled -= instance.OnAddSouls;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -923,6 +981,8 @@ namespace Input
         public interface IPlayerActions
         {
             void OnAct(InputAction.CallbackContext context);
+            void OnLoadShop(InputAction.CallbackContext context);
+            void OnAddSouls(InputAction.CallbackContext context);
         }
         public interface IUIActions
         {

@@ -60,7 +60,7 @@ namespace Game.Battles
 
     public static CombatantData DefaultEnemy => new()
     {
-      Stats = new CombatantStats { Atk = 1, Hp = 5 },
+      Stats = new CombatantStats { Atk = 1, Hp = 3 },
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.Enemy,
@@ -69,7 +69,7 @@ namespace Game.Battles
 
     public static CombatantData EnemyOne => new()
     {
-      Stats = new CombatantStats { Atk = 2, Hp = 7 },
+      Stats = new CombatantStats { Atk = 2, Hp = 5 },
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.EnemyOne,
@@ -78,7 +78,7 @@ namespace Game.Battles
 
     public static CombatantData EnemyTwo => new()
     {
-      Stats = new CombatantStats { Atk = 4, Hp = 25 },
+      Stats = new CombatantStats { Atk = 4, Hp = 5 },
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.EnemyTwo,

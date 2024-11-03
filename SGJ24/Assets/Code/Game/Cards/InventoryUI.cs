@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Game.Battles;
 using Game.Infrastructure.Data;
 using Game.Shop;
 using UnityEngine;
@@ -8,6 +9,9 @@ namespace Game.Cards
 {
   public class InventoryUI : ControllableMono<InventoryUI>
   {
+    [SerializeField]
+    private CanvasGroup _canvasGroup;
+    
     [SerializeField]
     private List<InventorySlotUI> _slots;
 
@@ -30,14 +34,14 @@ namespace Game.Cards
     public void UpdateView()
     {
       List<CardData> cards = _data.Get<InventoryData>().Cards;
-      if (cards.Count == 0)
+      if (!_data.Get<ArenaData>().SupportArrived && cards.Count == 0)
       {
         Hide();
         return;
       }
 
-      gameObject.SetActive(true);
-
+      _canvasGroup.alpha = 1;
+      
       for (int i = 0; i < cards.Count; i++)
         Slots[i].SetUp(cards[i]);
 
@@ -49,6 +53,6 @@ namespace Game.Cards
       UpdateView();
 
     public void Hide() =>
-      gameObject.SetActive(false);
+      _canvasGroup.alpha = 0;
   }
 }

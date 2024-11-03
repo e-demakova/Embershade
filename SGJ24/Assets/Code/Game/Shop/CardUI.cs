@@ -20,10 +20,17 @@ namespace Game.Shop
     [SerializeField]
     private TextMeshProUGUI _cost;
 
+    [SerializeField]
+    private Image _soulIcon;
+    
+    [SerializeField]
+    private CanvasGroup _canvasGroup;
+    
     private CardData _data;
-    private ShopUI _shop;
     private IGameData _gameData;
     private IAssetProvider _assets;
+    
+    private ShopUI Shop => _gameData.Get<SceneData>().Get<ShopUI>();
 
     [Inject]
     private void Construct(IAssetProvider assets, IGameData data)
@@ -32,26 +39,31 @@ namespace Game.Shop
       _assets = assets;
     }
 
-    public void SetUp(CardData data, ShopUI shopUI)
+    public void SetUp(CardData data)
     {
       _data = data;
-      _shop = shopUI;
-
+      
       _image.sprite = _assets.LoadAsset<Sprite>(data.SpritePath);
       _description.text = data.Spell.Description(_gameData.Get<LocalizationData>());
       _cost.text = _data.BuyCost.ToString();
       UpdateCostView();
     }
 
-    public void UpdateCostView() =>
-      _cost.color = _gameData.Get<SoulsData>().InWallet >= _data.BuyCost ? Color.white : Color.red;
+    public void UpdateCostView()
+    {
+      bool canBuy = _gameData.Get<SoulsData>().InWallet >= _data.BuyCost;
+      
+      _cost.color = canBuy ? Color.white : Color.red;
+      _soulIcon.color = canBuy ? Color.white : Color.red;
+      _canvasGroup.alpha = canBuy ? 1 : 0.5f;
+    }
 
     protected override void OnClick()
     {
-      if (!_shop.CanBuy(_data))
+      if (!Shop.CanBuy(_data))
         return;
 
-      _shop.Buy(_data);
+      Shop.Buy(_data);
       gameObject.SetActive(false);
     }
   }

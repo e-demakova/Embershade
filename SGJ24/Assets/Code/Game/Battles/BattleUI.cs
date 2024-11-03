@@ -7,18 +7,10 @@ namespace Game.Battles
     [SerializeField]
     private CanvasGroup _canvasGroup;
 
-    public void Show()
-    {
-      _canvasGroup.alpha = 1;
-      _canvasGroup.interactable = true;
-      _canvasGroup.blocksRaycasts = true;
-    }
+    public void Show() =>
+      _canvasGroup.gameObject.SetActive(true);
 
-    public void Hide()
-    {
-      _canvasGroup.alpha = 0;
-      _canvasGroup.interactable = false;
-      _canvasGroup.blocksRaycasts = false;
-    }
+    public void Hide() =>
+      _canvasGroup.gameObject.SetActive(false);
   }
 }
