@@ -7,8 +7,8 @@
     public const string EventSystem = "event-system";
     
     //combatants
-    public const string Hero = "Battle/hero";
-    public const string Enemy = "Battle/enemy";
+    public const string Combatant = "Battle/combatant";
+    public const string Enemy = "Battle/Sprites/enemy";
     public const string HeroDefault = "Battle/Sprites/hero";
     public const string HeroCat = "Battle/Sprites/cat";
     public const string HeroElf = "Battle/Sprites/elf";

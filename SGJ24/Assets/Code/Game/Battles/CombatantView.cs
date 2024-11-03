@@ -34,7 +34,7 @@ namespace Game.Battles
     {
       _rendering.OnDead();
       await transform.DOShakePosition(1f, 0.5f).WithCancellation(this.GetCancellationTokenOnDestroy());
-      await UniTask.WaitForSeconds(1f);
+      await UniTask.WaitForSeconds(0.5f);
     }
 
     public async UniTask MoveToHome()

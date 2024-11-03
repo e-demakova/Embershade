@@ -101,11 +101,12 @@ namespace Game.Battles
       if (prev == current)
         return;
 
-      text.text = current.ToString();
       await container.DOScale(1.3f, 0.2f)
                      .SetEase(Ease.InExpo)
                      .SetLoops(2, LoopType.Yoyo)
                      .WithCancellation(text.GetCancellationTokenOnDestroy());
+      
+      text.text = current.ToString();
     }
   }
 }

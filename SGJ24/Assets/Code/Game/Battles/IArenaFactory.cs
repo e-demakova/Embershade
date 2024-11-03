@@ -13,13 +13,11 @@ namespace Game.Battles
   {
     private readonly IBuildersFactory _builders;
     private readonly IGameData _data;
-    private readonly IAssetProvider _assets;
     private ArenaData ArenaData => _data.Get<ArenaData>();
 
-    public ArenaFactory(IBuildersFactory builders, IGameData data, IAssetProvider assets)
+    public ArenaFactory(IBuildersFactory builders, IGameData data)
     {
       _builders = builders;
-      _assets = assets;
       _data = data;
     }
 
@@ -36,7 +34,7 @@ namespace Game.Battles
     {
       CombatantData hero = ArenaData.Combatants[CombatantType.Hero];
 
-      hero.Instance = _builders.FromResources(Assets.Hero)
+      hero.Instance = _builders.FromResources(Assets.Combatant)
                                .At(new Vector3(-2.5f, -2.5f, 8f))
                                .Instantiate<CombatantView>()
                                .SetUp(hero);
@@ -46,7 +44,7 @@ namespace Game.Battles
     {
       CombatantData enemy = ArenaData.Combatants[CombatantType.Enemy] = CombatantsList.DefaultEnemy;
 
-      enemy.Instance = _builders.FromResources(Assets.Enemy)
+      enemy.Instance = _builders.FromResources(Assets.Combatant)
                                 .At(new Vector3(2.5f, -2.5f, 8f))
                                 .Instantiate<CombatantView>()
                                 .SetUp(enemy);

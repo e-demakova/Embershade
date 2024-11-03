@@ -58,7 +58,8 @@ namespace Game.Battles
     {
       Stats = new CombatantStats { Atk = 1, Hp = 5 },
       Reactions = new List<IReaction>(),
-      Tags = new Dictionary<Type, ICombatantTag> { }
+      Tags = new Dictionary<Type, ICombatantTag> { },
+      SpritePath = Assets.Enemy
     };
   }
 }
