@@ -26,11 +26,15 @@ namespace Game.Shop
     [SerializeField]
     private List<HeroUI> _heroes;
 
+    [SerializeField]
+    private InventoryUI _inventory;
+    
     private IGameData _data;
     private IGameStateMachine _stateMachine;
 
     private SoulsData Souls => _data.Get<SoulsData>();
     private ArenaData Arena => _data.Get<ArenaData>();
+    private InventoryData Inventory => _data.Get<InventoryData>();
 
     [Inject]
     private void Construct(IGameData data, IGameStateMachine stateMachine)
@@ -61,23 +65,31 @@ namespace Game.Shop
     private void ShowCards()
     {
       _cardsContainer.SetActive(true);
-      foreach (CardUI card in _cards)
-        card.SetUp(CardsList.Test, this);
+      
+      _cards[0].SetUp(CardsList.Hand, this);
+      _cards[1].SetUp(CardsList.Heart, this);
+      _cards[2].SetUp(CardsList.Knife, this);
     }
 
     public void Select(CombatantData combatant)
     {
+      Inventory.Clear();
       Arena.Combatants[CombatantType.Hero] = combatant;
       _stateMachine.Enter<LoadArenaState>();
     }
 
     public bool CanBuy(CardData card) =>
-      Souls.InWallet >= card.Cost;
+      Inventory.CanAdd() && Souls.InWallet >= card.BuyCost;
 
     public void Buy(CardData card)
     {
-      Souls.InWallet -= card.Cost;
+      Souls.InWallet -= card.BuyCost;
       UpdateWalletUI();
+      Inventory.Add(card);
+      _inventory.UpdateView();
+      
+      foreach (CardUI cardUI in _cards) 
+        cardUI.UpdateCostView();
     }
 
     private void UpdateWalletUI() =>

@@ -49,6 +49,9 @@ namespace Game.Dialogues
 
     private async UniTask Show(List<LocalizedString> replicas, DialogueReplicaUI replicaUI)
     {
+      if(GameSettings.SkipDialogues)
+        return;
+      
       foreach (LocalizedString replica in replicas)
       {
         await replicaUI.Show(replica);

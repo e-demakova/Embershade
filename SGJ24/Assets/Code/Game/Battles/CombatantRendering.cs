@@ -26,6 +26,7 @@ namespace Game.Battles
 
     [SerializeField]
     private List<SpriteRenderer> _renderers;
+    
     [SerializeField]
     private List<SpriteMask> _masks;
     

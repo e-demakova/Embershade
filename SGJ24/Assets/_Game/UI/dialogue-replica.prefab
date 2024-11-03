@@ -146,6 +146,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canvasGroup: {fileID: 3145593011109827970}
   _text: {fileID: 423614297227192288}
+  _duration: 0.3
+  _shakeDuration: 0.1
 --- !u!1 &2419509279060584985
 GameObject:
   m_ObjectHideFlags: 0
