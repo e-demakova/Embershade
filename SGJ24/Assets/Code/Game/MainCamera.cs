@@ -21,13 +21,13 @@ namespace Game
     public async UniTask Zoom(float to, float duration)
     {
       if (Math.Abs(transform.position.z - to) < 0.1f)
-        await UniTask.WaitForSeconds(duration);
-      else
-        await DOTween.Sequence()
-                     .Join(transform.DOMoveZ(to, duration))
-                     .Join(transform.DOMoveY(0.3f, duration / 2).SetLoops(2, LoopType.Yoyo))
-                     .SetEase(Ease.InOutQuad)
-                     .WithCancellation(this.GetCancellationTokenOnDestroy());
+        return;
+
+      await DOTween.Sequence()
+                   .Join(transform.DOMoveZ(to, duration))
+                   .Join(transform.DOMoveY(0.3f, duration / 2).SetLoops(2, LoopType.Yoyo))
+                   .SetEase(Ease.InOutQuad)
+                   .WithCancellation(this.GetCancellationTokenOnDestroy());
     }
 
     public async UniTask Shake() =>

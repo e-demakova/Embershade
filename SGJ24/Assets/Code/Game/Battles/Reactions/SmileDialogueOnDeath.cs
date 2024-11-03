@@ -8,17 +8,22 @@ using Zenject;
 
 namespace Game.Battles.Reactions
 {
-  public class DialogueOnDeath : IReaction
+  public class SmileDialogueOnDeath : IReaction
   {
-    private readonly List<LocalizedString> _replicas;
-    private IGameData _data;
+    private readonly List<LocalizedString> _centered;
+    private readonly List<LocalizedString> _smile;
+
     private int _availableExecutions = 1;
 
-    public DialogueOnDeath(List<LocalizedString> replicas)
-    {
-      _replicas = replicas;
-    }
+    private IGameData _data;
+    private DialogueUI Dialogues => _data.Get<SceneData>().Get<DialogueUI>();
 
+   public SmileDialogueOnDeath(List<LocalizedString> centered, List<LocalizedString> smile)
+   {
+     _centered = centered;
+     _smile = smile;
+   }
+    
     [Inject]
     private void Construct(IGameData data)
     {
@@ -31,8 +36,7 @@ namespace Game.Battles.Reactions
     public async UniTask React(ITrigger trigger, CombatantData owner)
     {
       _availableExecutions--;
-      _data.Get<SceneData>().Get<MainCamera>().ZoomOut().Forget();
-      await _data.Get<SceneData>().Get<DialogueUI>().ShowCentredDialogue(_replicas);
+      await Dialogues.SmileDialogue(_centered, _smile);
     }
   }
 }

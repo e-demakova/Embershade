@@ -29,9 +29,9 @@ namespace Game.Cards
     
     public static List<CardData> Immortal => new()
     {
-      EyeRare,
-      FingerRare,
-      CakeRare
+      Skull,
+      Hand,
+      FullCake
     };
 
     public static CardData EyeTrash => new()
@@ -89,7 +89,7 @@ namespace Game.Cards
       SpritePath = Assets.CardCake,
       Spell = new IncreaseHpSpell(2)
     };
-    
+
     public static CardData CakeTrash => new()
     {
       BuyCost = 1,
@@ -97,13 +97,37 @@ namespace Game.Cards
       SpritePath = Assets.CardCakeTrash,
       Spell = new IncreaseHpSpell(0)
     };
-    
+
     public static CardData CakeRare => new()
     {
       BuyCost = 4,
       SellCost = 2,
       SpritePath = Assets.CardCake,
       Spell = new IncreaseHpSpell(4)
+    };
+
+    public static CardData Skull => new()
+    {
+      BuyCost = 6,
+      SellCost = 3,
+      SpritePath = Assets.CardSkull,
+      Spell = new DecreaseEnemyAtkSpell(9)
+    };
+    
+    public static CardData Hand => new()
+    {
+      BuyCost = 6,
+      SellCost = 3,
+      SpritePath = Assets.CardHand,
+      Spell = new IncreaseAtkSpell(9)
+    };
+  
+    public static CardData FullCake => new()
+    {
+      BuyCost = 6,
+      SellCost = 3,
+      SpritePath = Assets.CardFullCake,
+      Spell = new IncreaseHpSpell(9)
     };
   }
 }

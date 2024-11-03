@@ -25,18 +25,27 @@ namespace Utils.Localization
 
     public string GetString(LocalizedString localizedString)
     {
+      if (localizedString == null)
+      {
+        LogError();
+        return string.Empty;
+      }
+      
       LocalizedEntry entry = localizedString.Entries.FirstOrDefault(x => x.Language == Language);
+      
       if (entry == null)
       {
-        DLogger.Message(DSenders.Localization)
-               .WithText(Language.ToString().White().Bold() + " localization not set fot string.")
-               .WithFormat(DebugFormat.Exception)
-               .Log();
-
+        LogError();
         return string.Empty;
       }
 
       return entry?.String;
     }
+
+    private void LogError() =>
+      DLogger.Message(DSenders.Localization)
+             .WithText(Language.ToString().White().Bold() + " localization not set fot string.")
+             .WithFormat(DebugFormat.Exception)
+             .Log();
   }
 }

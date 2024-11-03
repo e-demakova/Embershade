@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Battles;
+using Game.Infrastructure.AssetsManagement;
+using Game.Infrastructure.Data;
 using Game.PlayerInput;
 using UnityEngine;
 using Utils.Localization;
@@ -23,13 +26,17 @@ namespace Game.Dialogues
     [SerializeField]
     private CanvasGroup _dark;
 
+    private IBuildersFactory _builders;
     private IInput _input;
+    private IGameData _data;
     private bool _skip;
-    
+
     [Inject]
-    private void Construct(IInput input)
+    private void Construct(IInput input, IBuildersFactory builders, IGameData data)
     {
       _input = input;
+      _builders = builders;
+      _data = data;
     }
 
     public async UniTask ShowDialogue(List<LocalizedString> replicas) =>
@@ -47,11 +54,31 @@ namespace Game.Dialogues
     public async UniTask ShowCentredDialogue(List<LocalizedString> replicas) =>
       await Show(replicas, _centredReplica);
 
+    public async UniTask SmileDialogue(List<LocalizedString> centered, List<LocalizedString> smile)
+    {
+      await UniTask.WhenAll(
+        HideBack(),
+        _data.Get<SceneData>().Get<MainCamera>().ZoomOut());
+
+      foreach (CombatantData combatant in _data.Get<ArenaData>().Combatants.Values)
+        combatant.Instance.gameObject.SetActive(false);
+
+      if (centered != null)
+        await ShowCentredDialogue(centered);
+
+      _builders.FromResources(Assets.SupportAppear).Instantiate();
+
+      await ShowBack();
+
+      await UniTask.WaitForSeconds(1f);
+      await ShowSmileDialogue(smile);
+    }
+
     private async UniTask Show(List<LocalizedString> replicas, DialogueReplicaUI replicaUI)
     {
-      if(GameSettings.SkipDialogues)
+      if (GameSettings.SkipDialogues)
         return;
-      
+
       foreach (LocalizedString replica in replicas)
       {
         await replicaUI.Show(replica);

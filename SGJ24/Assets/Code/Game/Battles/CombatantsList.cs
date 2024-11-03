@@ -14,8 +14,9 @@ namespace Game.Battles
       Reactions = new List<IReaction>
       {
         new SummonOnDeath(),
+        new SmileDialogueOnDeath(DialoguesList.FirstDeath, DialoguesList.SmileFirst),
         new RecoverHealthOnBattleEnded(1),
-        new DialogueOnTurnStarted(DialoguesList.First)
+        new DialogueOnTurnStarted(DialoguesList.First),
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
       SpritePath = Assets.HeroDefault,
@@ -27,7 +28,8 @@ namespace Game.Battles
       Stats = new CombatantStats { Atk = 1, Hp = 2 },
       Reactions = new List<IReaction>
       {
-        new DialogueOnTurnStarted(DialoguesList.First)
+        new DialogueOnTurnStarted(DialoguesList.Cat),
+        new SellTutorSmileDialogue()
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
       SpritePath = Assets.HeroCat,
@@ -39,7 +41,8 @@ namespace Game.Battles
       Stats = new CombatantStats { Atk = 1, Hp = 2 },
       Reactions = new List<IReaction>
       {
-        new DialogueOnTurnStarted(DialoguesList.First)
+        new DialogueOnTurnStarted(DialoguesList.First),
+        new SellTutorSmileDialogue()
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
       SpritePath = Assets.HeroElf,
@@ -51,7 +54,8 @@ namespace Game.Battles
       Stats = new CombatantStats { Atk = 1, Hp = 2 },
       Reactions = new List<IReaction>
       {
-        new DialogueOnTurnStarted(DialoguesList.First)
+        new DialogueOnTurnStarted(DialoguesList.First),
+        new SellTutorSmileDialogue()
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
       SpritePath = Assets.HeroKnight,

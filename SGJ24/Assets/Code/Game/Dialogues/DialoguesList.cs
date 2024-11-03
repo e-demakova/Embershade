@@ -24,6 +24,18 @@ namespace Game.Dialogues
         }
       }
     };
+
+    public static readonly List<LocalizedString> Cat = new()
+    {
+      new LocalizedString
+      {
+        Entries = new List<LocalizedEntry>
+        {
+          new() { Language = Language.Eng, String = "I can't them let down." },
+          new() { Language = Language.Ru, String = "Я не могу их подвести." }
+        }
+      }
+    };
     
     public static readonly List<LocalizedString> FirstDeath = new()
     {
@@ -71,6 +83,18 @@ namespace Game.Dialogues
           new() { Language = Language.Ru, String = "Лучше обменяй ее у меня!" }
         }
       }
+    };
+    
+    public static readonly List<LocalizedString> SellTutor = new()
+    {
+      new LocalizedString
+      {
+        Entries = new List<LocalizedEntry>
+        {
+          new() { Language = Language.Eng, String = "If you haven't souls, you can sell items from your inventory." },
+          new() { Language = Language.Ru, String = "Если у тебя нет душ, ты можешь продать свои вещи из инвентаря." }
+        }
+      },
     };
   }
 }
