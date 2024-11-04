@@ -857,6 +857,7 @@ MonoBehaviour:
   _cost: {fileID: 4408026962705642303}
   _soulIcon: {fileID: 6737553862514661251}
   _canvasGroup: {fileID: 2043460358761462973}
+  _sound: {fileID: 8300000, guid: 97c87a9923a30f64c9eed47ca3d3f212, type: 3}
 --- !u!1 &7637739886863194313
 GameObject:
   m_ObjectHideFlags: 0

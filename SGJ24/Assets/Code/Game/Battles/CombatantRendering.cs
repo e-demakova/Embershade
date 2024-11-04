@@ -54,6 +54,8 @@ namespace Game.Battles
     private int _prevHp;
     private int _prevAtk;
 
+    public bool StatsChanged => _prevHp != _combatant.Stats.Hp || _prevAtk != _combatant.Stats.Atk;
+    
     [Inject]
     private void Construct(IAssetProvider assets)
     {
@@ -98,7 +100,7 @@ namespace Game.Battles
     {
       _soulsCount.text = souls.ToString();
       _soulsDrop.gameObject.SetActive(true);
-      await UniTask.WaitForSeconds(0.5f);
+      await UniTask.WaitForSeconds(0.7f);
     }
 
     private async UniTask UpdateStat(int prev, int current, TextMeshProUGUI text, Transform container)

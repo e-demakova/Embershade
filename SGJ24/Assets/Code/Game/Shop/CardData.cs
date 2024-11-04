@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Game.Battles;
 using Game.Cards;
 using Game.Infrastructure.Data;
 

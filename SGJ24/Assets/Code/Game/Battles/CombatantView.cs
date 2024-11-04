@@ -1,6 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Audio;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Battles
 {
@@ -12,8 +14,24 @@ namespace Game.Battles
     [SerializeField]
     private Ease _ease;
 
+    [SerializeField]
+    private AudioClip _dead;
+    
+    [SerializeField]
+    private AudioClip _updateStat;
+    
+    [SerializeField]
+    private AudioClip _hit;
+    
     private Vector3 _homePosition;
+    private IAudioPlayer _audioPlayer;
 
+    [Inject]
+    private void Construct(IAudioPlayer audioPlayer)
+    {
+      _audioPlayer = audioPlayer;
+    }
+    
     private void Start() =>
       _homePosition = transform.position;
 
@@ -25,6 +43,7 @@ namespace Game.Battles
     
     public async UniTask GetHit()
     {
+      _audioPlayer.PlaySound(_hit);
       await transform.DOShakePosition(0.1f, new Vector3(0.5f, 0, 0)).WithCancellation(this.GetCancellationTokenOnDestroy());
       await _rendering.OnGetHit();
       await UniTask.WaitForSeconds(0.2f);
@@ -32,6 +51,7 @@ namespace Game.Battles
 
     public async UniTask Dead()
     {
+      _audioPlayer.PlaySound(_dead);
       _rendering.OnDead();
       await transform.DOShakePosition(1f, 0.5f).WithCancellation(this.GetCancellationTokenOnDestroy());
       await UniTask.WaitForSeconds(0.5f);
@@ -43,8 +63,14 @@ namespace Game.Battles
       _rendering.OnHome();
     }
 
-    public async UniTask UpdateStats() =>
+    public async UniTask UpdateStats()
+    {
+      if(!_rendering.StatsChanged)
+         return;
+      
+      _audioPlayer.PlaySound(_updateStat);
       await _rendering.UpdateStats();
+    }
 
     public async UniTask MoveToTarget(CombatantView target)
     {

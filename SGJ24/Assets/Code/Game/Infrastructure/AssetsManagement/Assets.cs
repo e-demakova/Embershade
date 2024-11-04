@@ -33,5 +33,8 @@
     
     public const string Support = "Battle/support";
     public const string SupportAppear = "Battle/support-appear";
+    
+    //Sound
+    public const string ClickSound = "Sounds/click";
   }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Audio;
 using Game.Battles;
 using Game.Infrastructure.AssetsManagement;
 using Game.Infrastructure.Data;
@@ -26,17 +27,22 @@ namespace Game.Dialogues
     [SerializeField]
     private CanvasGroup _dark;
 
+    [SerializeField]
+    private AudioClip _sound;
+
     private IBuildersFactory _builders;
     private IInput _input;
     private IGameData _data;
+    private IAudioPlayer _audioPlayer;
     private bool _skip;
 
     [Inject]
-    private void Construct(IInput input, IBuildersFactory builders, IGameData data)
+    private void Construct(IInput input, IBuildersFactory builders, IGameData data, IAudioPlayer audioPlayer)
     {
       _input = input;
       _builders = builders;
       _data = data;
+      _audioPlayer = audioPlayer;
     }
 
     public async UniTask ShowDialogue(List<LocalizedString> replicas) =>
@@ -81,6 +87,7 @@ namespace Game.Dialogues
 
       foreach (LocalizedString replica in replicas)
       {
+        _audioPlayer.PlaySound(_sound);
         await replicaUI.Show(replica);
         await WaitPlayerInput();
       }

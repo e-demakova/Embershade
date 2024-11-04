@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 7615250972045727151}
   - component: {fileID: 6315818606703841333}
   - component: {fileID: 8038590725298921229}
+  - component: {fileID: 9168517190076757908}
   m_Layer: 5
   m_Name: inventory-slot
   m_TagString: Untagged
@@ -253,3 +254,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9168517190076757908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5274771639640395335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8159e47cba5e468e9ef3d6a5487f8866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: {fileID: 8300000, guid: 97c87a9923a30f64c9eed47ca3d3f212, type: 3}
