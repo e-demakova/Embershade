@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-  public class FogTweener : MonoBehaviour
+  public class SimpleTweener : MonoBehaviour
   {
     [SerializeField]
     private Vector3 _rotation;

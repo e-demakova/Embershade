@@ -13,6 +13,7 @@ namespace Game.Battles
       Stats = new CombatantStats { Atk = 1, Hp = 1 },
       Reactions = new List<IReaction>
       {
+        new SecondDialogueOnDeath(),
         new SummonOnDeath(),
         new SmileDialogueOnDeath(DialoguesList.FirstDeath, DialoguesList.SmileFirst),
         new RecoverHealthOnBattleEnded(1),
@@ -29,6 +30,7 @@ namespace Game.Battles
       Reactions = new List<IReaction>
       {
         new DialogueOnTurnStarted(DialoguesList.Cat),
+        new SmileDialogueOnDeath(DialoguesList.CatDead, DialoguesList.CatDeadSmile),
         new SellTutorSmileDialogue()
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
@@ -87,8 +89,8 @@ namespace Game.Battles
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.Goat,
       Souls = 2
-    }; 
-    
+    };
+
     public static CombatantData Heads => new()
     {
       Stats = new CombatantStats { Atk = 4, Hp = 5 },
@@ -97,7 +99,7 @@ namespace Game.Battles
       SpritePath = Assets.Heads,
       Souls = 2
     };
-    
+
     public static CombatantData Scarecrow => new()
     {
       Stats = new CombatantStats { Atk = 4, Hp = 5 },

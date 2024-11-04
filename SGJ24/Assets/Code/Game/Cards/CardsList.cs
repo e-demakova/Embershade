@@ -111,7 +111,7 @@ namespace Game.Cards
       BuyCost = 6,
       SellCost = 3,
       SpritePath = Assets.CardSkull,
-      Spell = new DecreaseEnemyAtkSpell(9)
+      Spell = new DecreaseEnemyAtkForEyeSpell(3)
     };
     
     public static CardData Hand => new()

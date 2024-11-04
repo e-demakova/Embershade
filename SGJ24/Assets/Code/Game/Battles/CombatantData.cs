@@ -12,13 +12,13 @@ namespace Game.Battles
     public CombatantView Instance;
     public CombatantStats Stats;
     public int Souls = 1;
-    
+
     public string SpritePath;
     public LocalizedString Description = DescriptionsList.Default;
 
     public List<IReaction> Reactions;
-    public Dictionary<Type, ICombatantTag> Tags;
-    
+    public Dictionary<Type, ICombatantTag> Tags = new();
+
     public bool IsDead => Stats.Hp <= 0;
 
     public bool TargetMatch(CombatantData target) =>

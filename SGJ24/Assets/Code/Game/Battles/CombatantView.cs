@@ -54,10 +54,8 @@ namespace Game.Battles
       await Move(position);
     }
 
-    public async UniTask DropSouls()
-    {
-      
-    }
+    public async UniTask DropSouls(int souls) =>
+      await _rendering.DropSouls(souls);
 
     private UniTask Move(Vector3 to) =>
       transform.DOMove(to, Durations.CombatantMove).SetEase(_ease)

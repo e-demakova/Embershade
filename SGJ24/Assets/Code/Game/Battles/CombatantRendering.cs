@@ -43,6 +43,12 @@ namespace Game.Battles
     [SerializeField]
     private List<SpriteMask> _masks;
 
+    [SerializeField]
+    private TextMeshProUGUI _soulsCount;
+    
+    [SerializeField]
+    private GameObject _soulsDrop;
+    
     private IAssetProvider _assets;
     private CombatantData _combatant;
     private int _prevHp;
@@ -86,6 +92,13 @@ namespace Game.Battles
 
       _prevHp = _combatant.Stats.Hp;
       _prevAtk = _combatant.Stats.Atk;
+    }
+
+    public async UniTask DropSouls(int souls)
+    {
+      _soulsCount.text = souls.ToString();
+      _soulsDrop.gameObject.SetActive(true);
+      await UniTask.WaitForSeconds(0.5f);
     }
 
     private async UniTask UpdateStat(int prev, int current, TextMeshProUGUI text, Transform container)
