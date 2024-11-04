@@ -53,7 +53,7 @@ namespace Game.Battles
       else
       {
         address = Assets.Chest;
-        combatant = CombatantsList.Chest;
+        combatant = _data.Get<ProgressData>().Chest;
       }
 
       ArenaData.Combatants[CombatantType.Enemy] = combatant;

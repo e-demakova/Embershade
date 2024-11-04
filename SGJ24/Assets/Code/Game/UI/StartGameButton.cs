@@ -25,6 +25,7 @@ namespace Game.UI
       _data.Get<ArenaData>().ResetQueue();
       _data.Get<ShopData>().ResetQueue();
       _data.Get<InventoryData>().Clear();
+      _data.Get<ProgressData>().Chest = CombatantsList.Chest;
 
       if (_data.Get<ProgressData>().Win)
       {

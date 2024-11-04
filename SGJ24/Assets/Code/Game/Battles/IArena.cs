@@ -8,7 +8,6 @@ using Game.Infrastructure.Core;
 using Game.Infrastructure.Data;
 using Game.Infrastructure.Scenes;
 using Game.Shop;
-using UnityEditor;
 using UnityEngine;
 using Utils.PostponedTasks;
 
@@ -104,7 +103,7 @@ namespace Game.Battles
       {
         await React(new BattleEndTrigger());
         RevertCards();
-        
+
         if (_data.Get<ProgressData>().Win)
           _stateMachine.Enter<LoadSceneState, string>(ScenesList.End);
         else
@@ -133,9 +132,9 @@ namespace Game.Battles
         InventorySlotUI slot = slots[i];
         tooltip.Show((RectTransform) slot.transform, slot.Card);
 
-        await UniTask.WaitForSeconds(0.5f);
+        await UniTask.WaitForSeconds(list.Count > 2 ? 0.1f : 0.3f);
         await _spellApplier.ApplySpell(list[i].Spell);
-        await UniTask.WaitForSeconds(0.2f);
+        await UniTask.WaitForSeconds(0.1f);
       }
 
       tooltip.Hide();

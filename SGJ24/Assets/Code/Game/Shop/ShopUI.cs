@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Game.Battles;
 using Game.Cards;
 using Game.Infrastructure.Core;
@@ -12,6 +14,9 @@ namespace Game.Shop
 {
   public class ShopUI : ControllableMono<ShopUI>
   {
+    [SerializeField]
+    private CanvasGroup _canvas;
+
     [SerializeField]
     private TextMeshProUGUI _wallet;
 
@@ -51,6 +56,8 @@ namespace Game.Shop
         ShowHeroes();
       else
         ShowCards();
+
+      EnableInteraction().Forget();
     }
 
     private void ShowHeroes()
@@ -67,7 +74,7 @@ namespace Game.Shop
       _cardsContainer.SetActive(true);
 
       List<CardData> cards = _data.Get<ShopData>().Cards();
-      
+
       foreach (CardUI cardUI in _cards)
       {
         CardData card = cards.Random();
@@ -116,5 +123,12 @@ namespace Game.Shop
 
     private void UpdateWalletUI() =>
       _wallet.text = Souls.InWallet.ToString();
+
+    private async UniTask EnableInteraction()
+    {
+      _canvas.alpha = 0;
+      await _canvas.DOFade(1, 0.3f).WithCancellation(_canvas.GetCancellationTokenOnDestroy());
+      _canvas.interactable = true;
+    }
   }
 }

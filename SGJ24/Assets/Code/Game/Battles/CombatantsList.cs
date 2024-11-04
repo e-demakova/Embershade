@@ -113,10 +113,10 @@ namespace Game.Battles
 
     public static CombatantData Chest => new()
     {
-      Stats = new CombatantStats { Atk = 12, Hp = 25 },
+      Stats = new CombatantStats { Atk = 15, Hp = 40 },
       Reactions = new List<IReaction>
       {
-        new SmileDialogueOnDeath(null, DialoguesList.Win),
+        new DialogueOnSecondChest(),
         new WinOnDeath()
       },
       Tags = new Dictionary<Type, ICombatantTag> { },

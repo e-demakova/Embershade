@@ -100,7 +100,7 @@ namespace Game.Dialogues
         Entries = new List<LocalizedEntry>
         {
           new() { Language = Language.Eng, String = "No one will dare laugh at me again." },
-          new() { Language = Language.Ru, String = "Больше ни кто не посмеет смеяться надо мной." }
+          new() { Language = Language.Ru, String = "Больше никто не посмеет смеяться надо мной." }
         }
       },
     };
@@ -140,7 +140,7 @@ namespace Game.Dialogues
         Entries = new List<LocalizedEntry>
         {
           new() { Language = Language.Eng, String = "Better to invest in what you’re actually good at." },
-          new() { Language = Language.Ru, String = "Лучше бы вложился в то, в чем способен." }
+          new() { Language = Language.Ru, String = "Лучше бы вложился в свои настоящие таланты." }
         }
       },
       new LocalizedString
@@ -148,7 +148,7 @@ namespace Game.Dialogues
         Entries = new List<LocalizedEntry>
         {
           new() { Language = Language.Eng, String = "Like drinking and loafing." },
-          new() { Language = Language.Ru, String = "В алкоголь и туниядство." }
+          new() { Language = Language.Ru, String = "В тунеядство и пьянство." }
         }
       },
     };
@@ -191,8 +191,8 @@ namespace Game.Dialogues
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "Better to die than live with a daughter like you." },
-          new() { Language = Language.Ru, String = "Лучше умереть, чем жить с такой дочерью как ты." }
+          new() { Language = Language.Eng, String = "Better to die than to live with a daughter like you." },
+          new() { Language = Language.Ru, String = "Лучше умереть, чем жить с такой дочерью, как ты." }
         },
       },
       new LocalizedString
@@ -208,7 +208,7 @@ namespace Game.Dialogues
         Entries = new List<LocalizedEntry>
         {
           new() { Language = Language.Eng, String = "Maybe that’s why she got sick?" },
-          new() { Language = Language.Ru, String = "Может, она поэтому и заболела?" }
+          new() { Language = Language.Ru, String = "Может она поэтому и заболела?" }
         },
       }
     };
@@ -220,7 +220,7 @@ namespace Game.Dialogues
         Entries = new List<LocalizedEntry>
         {
           new() { Language = Language.Eng, String = "This can't be the end." },
-          new() { Language = Language.Ru, String = "Это же не может быть концом?" }
+          new() { Language = Language.Ru, String = "Это же не конец?" }
         }
       },
       new LocalizedString
@@ -235,7 +235,7 @@ namespace Game.Dialogues
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "The hero can't die so quickly." },
+          new() { Language = Language.Eng, String = "The hero shouldn't die so quickly." },
           new() { Language = Language.Ru, String = "Главный герой не должен умирать так быстро." }
         }
       }
@@ -276,7 +276,7 @@ namespace Game.Dialogues
         Entries = new List<LocalizedEntry>
         {
           new() { Language = Language.Eng, String = "They lied to you just to make you leave." },
-          new() { Language = Language.Ru, String = "Они соврали, что бы ты наконец ушел." }
+          new() { Language = Language.Ru, String = "Они соврали, чтобы ты наконец ушел." }
         }
       },
       new LocalizedString
@@ -312,7 +312,7 @@ namespace Game.Dialogues
         Entries = new List<LocalizedEntry>
         {
           new() { Language = Language.Eng, String = "Why should such a valuable soul fade so soon?" },
-          new() { Language = Language.Ru, String = "За чем же такой ценной душе так скоро угасать?" }
+          new() { Language = Language.Ru, String = "Зачем же такой ценной душе так скоро угасать?" }
         }
       },
       new LocalizedString
@@ -344,39 +344,87 @@ namespace Game.Dialogues
         }
       },
     };
-    
+
+    public static readonly List<LocalizedString> MeetChestSecondTime = new()
+    {
+      new LocalizedString
+      {
+        Entries = new List<LocalizedEntry>
+        {
+          new() { Language = Language.Eng, String = "Heroes before me have wounded this chest." },
+          new() { Language = Language.Ru, String = "Герои до меня ранили этот сундук." }
+        }
+      },
+      new LocalizedString
+      {
+        Entries = new List<LocalizedEntry>
+        {
+          new() { Language = Language.Eng, String = "I'll finish it off." },
+          new() { Language = Language.Ru, String = "А я его добью." }
+        }
+      },
+    };
+
+    public static readonly List<LocalizedString> DefeatChest = new()
+    {
+      new LocalizedString
+      {
+        Entries = new List<LocalizedEntry>
+        {
+          new() { Language = Language.Eng, String = "Finally! I’ve won!" },
+          new() { Language = Language.Ru, String = "Наконец-то! Я победил!" }
+        }
+      },
+      new LocalizedString
+      {
+        Entries = new List<LocalizedEntry>
+        {
+          new() { Language = Language.Eng, String = "Now my dream..." },
+          new() { Language = Language.Ru, String = "Теперь моя мечта..." }
+        }
+      }
+    };
+
     public static readonly List<LocalizedString> Win = new()
     {
       new LocalizedString
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "It seems our hero has found their happiness!" },
-          new() { Language = Language.Ru, String = "Похоже, наш герой нашел свое счастье!" }
+          new() { Language = Language.Eng, String = "My dream!" },
+          new() { Language = Language.Ru, String = "Моя мечта!" }
         }
       },
       new LocalizedString
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "But can it last long with a sold soul?" },
-          new() { Language = Language.Ru, String = "Но можно ли наслаждаться им долго с проданной душей?" }
+          new() { Language = Language.Eng, String = "If only it weren't for your pride and arrogance..." },
+          new() { Language = Language.Ru, String = "Если бы не ваше самомнение и гордость..." }
         }
       },
       new LocalizedString
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "Anyway..." },
-          new() { Language = Language.Ru, String = "Как бы то ни было..." }
+          new() { Language = Language.Eng, String = "...the confidence that fate will bend to your will." },
+          new() { Language = Language.Ru, String = "...уверенность в том, что судьба подстроиться под вас." }
         }
       },
       new LocalizedString
       {
         Entries = new List<LocalizedEntry>
         {
-          new() { Language = Language.Eng, String = "Thank you for playing!" },
-          new() { Language = Language.Ru, String = "Спасибо за игру!" }
+          new() { Language = Language.Eng, String = "I would have never gotten this chest!" },
+          new() { Language = Language.Ru, String = "Я бы ни когда не получил этот сундук!" }
+        }
+      },
+      new LocalizedString
+      {
+        Entries = new List<LocalizedEntry>
+        {
+          new() { Language = Language.Eng, String = "Thank you, hero. Farewell." },
+          new() { Language = Language.Ru, String = "Спасибо, герой. И прощай." }
         }
       },
     };

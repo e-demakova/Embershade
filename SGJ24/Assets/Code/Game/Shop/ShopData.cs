@@ -22,6 +22,7 @@ namespace Game.Shop
       _cardsQueue.Enqueue(CardsList.Common);
       _cardsQueue.Enqueue(CardsList.Rare);
       _cardsQueue.Enqueue(CardsList.SmallTrash);
+      _cardsQueue.Enqueue(CardsList.FullTrash);
       _cardsQueue.Enqueue(CardsList.Immortal);
       _cardsQueue.Enqueue(CardsList.FullTrash);
       _cardsQueue.Enqueue(CardsList.Trash);

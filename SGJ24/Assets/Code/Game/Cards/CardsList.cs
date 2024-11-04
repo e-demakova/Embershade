@@ -17,8 +17,8 @@ namespace Game.Cards
     public static List<CardData> SmallTrash => new()
     {
       EyeTrash,
-      Finger,
-      Cake
+      FingerRare,
+      CakeRare
     };
 
     public static List<CardData> Trash => new()
@@ -26,14 +26,14 @@ namespace Game.Cards
       EyeTrash,
       FingerTrash,
       CakeTrash,
-      Eye,
-      Finger,
-      Cake
+      EyeRare,
+      FingerRare,
+      CakeRare
     };
 
     public static List<CardData> FullTrash => new()
     {
-      Eye,
+      EyeRare,
       FingerTrash,
       CakeTrash,
     };
@@ -79,10 +79,10 @@ namespace Game.Cards
 
     public static CardData EyeRare => new()
     {
-      BuyCost = 4,
+      BuyCost = 3,
       SellCost = 2,
       SpritePath = Assets.CardEye,
-      Spell = new DecreaseEnemyAtkSpell(4),
+      Spell = new DecreaseEnemyAtkSpell(3),
       Tags = new Dictionary<Type, ICardTag>
       {
         { typeof(Eye), new Eye() },
@@ -131,7 +131,7 @@ namespace Game.Cards
       BuyCost = 2,
       SellCost = 1,
       SpritePath = Assets.CardCake,
-      Spell = new IncreaseHpSpell(2),
+      Spell = new IncreaseHpSpell(3),
       Tags = new Dictionary<Type, ICardTag>
       {
         { typeof(Cake), new Cake() },
@@ -156,7 +156,7 @@ namespace Game.Cards
       BuyCost = 3,
       SellCost = 2,
       SpritePath = Assets.CardCake,
-      Spell = new IncreaseHpSpell(4),
+      Spell = new IncreaseHpSpell(5),
       Tags = new Dictionary<Type, ICardTag>
       {
         { typeof(Cake), new Cake() },
@@ -168,7 +168,7 @@ namespace Game.Cards
       BuyCost = 6,
       SellCost = 3,
       SpritePath = Assets.CardSkull,
-      Spell = new DecreaseEnemyAtkForEyeSpell(3)
+      Spell = new DecreaseEnemyAtkForEyeSpell(5)
     };
 
     public static CardData Hand => new()
@@ -176,7 +176,7 @@ namespace Game.Cards
       BuyCost = 6,
       SellCost = 3,
       SpritePath = Assets.CardHand,
-      Spell = new IncreaseAtkForFingerSpell(9)
+      Spell = new IncreaseAtkForFingerSpell(5)
     };
 
     public static CardData FullCake => new()

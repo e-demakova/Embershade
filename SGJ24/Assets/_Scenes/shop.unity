@@ -2843,6 +2843,7 @@ GameObject:
   - component: {fileID: 1941983076}
   - component: {fileID: 1941983075}
   - component: {fileID: 1941983079}
+  - component: {fileID: 1941983080}
   m_Layer: 5
   m_Name: canvas
   m_TagString: Untagged
@@ -2946,6 +2947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0d98d0bdd2ee4bc78edb2b62c4ed2e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canvas: {fileID: 1941983080}
   _wallet: {fileID: 132418209}
   _heroesContainer: {fileID: 1407523351}
   _cardsContainer: {fileID: 1933496932}
@@ -2957,6 +2959,18 @@ MonoBehaviour:
   - {fileID: 1355821023190791770}
   - {fileID: 792822434}
   - {fileID: 1319641006}
+--- !u!225 &1941983080
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1941983074}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1959640714
 PrefabInstance:
   m_ObjectHideFlags: 0

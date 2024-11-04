@@ -1,4 +1,5 @@
-﻿using Game.Infrastructure.Data;
+﻿using Game.Battles;
+using Game.Infrastructure.Data;
 
 namespace Game
 {
@@ -6,6 +7,8 @@ namespace Game
   {
     public int Level;
     public int Run;
+    public int ChestMeet;
     public bool Win;
+    public CombatantData Chest;
   }
 }

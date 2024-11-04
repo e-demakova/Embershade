@@ -5,6 +5,6 @@ namespace Game.Audio
 {
   public class AudioData : IData
   {
-    public readonly SubjectFloat AudioVolume = new(0.7f, min: 0, max: 1);
+    public readonly SubjectFloat AudioVolume = new(1, min: 0, max: 1);
   }
 }
