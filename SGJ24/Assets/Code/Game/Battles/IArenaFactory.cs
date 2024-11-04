@@ -42,12 +42,25 @@ namespace Game.Battles
 
     private void CreateEnemy()
     {
-      CombatantData enemy = ArenaData.Combatants[CombatantType.Enemy] = ArenaData.GetNextEnemy();
-      
-      enemy.Instance = _builders.FromResources(Assets.Combatant)
-                                .At(new Vector3(2.5f, -2.5f, 8f))
-                                .Instantiate<CombatantView>()
-                                .SetUp(enemy);
+      CombatantData combatant;
+      string address;
+
+      if (ArenaData.EnemiesQueue.Count != 0)
+      {
+        address = Assets.Combatant;
+        combatant = ArenaData.GetNextEnemy();
+      }
+      else
+      {
+        address = Assets.Chest;
+        combatant = CombatantsList.Chest;
+      }
+
+      ArenaData.Combatants[CombatantType.Enemy] = combatant;
+      combatant.Instance = _builders.FromResources(address)
+                                    .At(new Vector3(2.5f, -2.5f, 8f))
+                                    .Instantiate<CombatantView>()
+                                    .SetUp(combatant);
     }
   }
 }

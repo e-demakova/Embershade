@@ -8,11 +8,13 @@
     
     //combatants
     public const string Combatant = "Battle/combatant";
+    public const string Chest = "Battle/chest";
     
     public const string Witch = "Battle/Sprites/witch";
     public const string CatEnemy = "Battle/Sprites/catenemy";
     public const string Goat = "Battle/Sprites/goat";
     public const string Scarecrow = "Battle/Sprites/scarecrow";
+    public const string ChestSprite = "Battle/Sprites/chest";
     public const string Heads = "Battle/Sprites/heads";
     
     public const string HeroDefault = "Battle/Sprites/hero";

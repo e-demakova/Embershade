@@ -6,7 +6,9 @@ using Game.Battles.Triggers;
 using Game.Cards;
 using Game.Infrastructure.Core;
 using Game.Infrastructure.Data;
+using Game.Infrastructure.Scenes;
 using Game.Shop;
+using UnityEditor;
 using UnityEngine;
 using Utils.PostponedTasks;
 
@@ -42,7 +44,7 @@ namespace Game.Battles
     public void Run()
     {
       _data.Get<ProgressData>().Level++;
-      
+
       Postponer.Do(BattleUI.Hide)
                .Do(InventoryUI.Hide)
                .Wait(() => React(new BattleStartedTrigger()))
@@ -100,9 +102,13 @@ namespace Game.Battles
     {
       if (Combatants.Any(x => x.IsDead))
       {
-        _stateMachine.Enter<LoadShopState>();
         await React(new BattleEndTrigger());
         RevertCards();
+        
+        if (_data.Get<ProgressData>().Win)
+          _stateMachine.Enter<LoadSceneState, string>(ScenesList.End);
+        else
+          _stateMachine.Enter<LoadShopState>();
       }
       else if (GameSettings.AutoBattle)
       {

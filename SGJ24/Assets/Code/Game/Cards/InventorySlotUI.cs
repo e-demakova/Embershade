@@ -40,12 +40,15 @@ namespace Game.Cards
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-      if (Card != null)
+      if (Card != null && _data.Get<SceneData>().TryGet(out ShopUI _))
         _data.Get<SceneData>().Get<InventoryTooltip>().Show((RectTransform) transform, Card);
     }
 
-    public void OnPointerExit(PointerEventData eventData) =>
-      HideTooltip();
+    public void OnPointerExit(PointerEventData eventData)
+    {
+      if (Card != null && _data.Get<SceneData>().TryGet(out ShopUI _))
+        HideTooltip();
+    }
 
     protected override void OnClick()
     {

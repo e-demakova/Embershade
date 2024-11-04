@@ -9,15 +9,15 @@ using Zenject;
 
 namespace Game.Cards
 {
-  public class DecreaseEnemyAtkForEyeSpell : ICardSpell
+  public class IncreaseAtkForFingerSpell : ICardSpell
   {
     private readonly int _value;
     
     private IGameData _data;
     
-    private int Value => _data.Get<InventoryData>().Cards.Count(x => x.Is<Broken>(out _) && x.Is<Eye>(out _)) * _value;
+    private int Value => _data.Get<InventoryData>().Cards.Count(x => x.Is<Broken>(out _) && x.Is<Finger>(out _)) * _value;
     
-    public DecreaseEnemyAtkForEyeSpell(int value) =>
+    public IncreaseAtkForFingerSpell(int value) =>
       _value = value;
 
     [Inject]
@@ -27,21 +27,21 @@ namespace Game.Cards
     }
 
     public string Description(LocalizationData localization) =>
-      string.Format(localization.GetString(DescriptionsList.DecreaseEnemyForEveryBroken), _value);
+      string.Format(localization.GetString(DescriptionsList.AtkForEveryBroken), _value);
 
     public bool CanApply(CombatantData combatant) =>
-      !combatant.Is<MainHeroTag>(out _);
+      combatant.Is<MainHeroTag>(out _);
 
     public bool CanRevert(CombatantData combatant) =>
-      !combatant.Is<MainHeroTag>(out _);
+      combatant.Is<MainHeroTag>(out _);
 
     public async UniTask Apply(CombatantData combatant)
     {
-      combatant.Stats.Atk -= Value;
+      combatant.Stats.Atk += Value;
       await combatant.Instance.UpdateStats();
     }
 
     public void Revert(CombatantData combatant) =>
-      combatant.Stats.Atk += Value;
+      combatant.Stats.Atk -= Value;
   }
 }

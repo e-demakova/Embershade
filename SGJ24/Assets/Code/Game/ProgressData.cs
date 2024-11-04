@@ -6,5 +6,6 @@ namespace Game
   {
     public int Level;
     public int Run;
+    public bool Win;
   }
 }

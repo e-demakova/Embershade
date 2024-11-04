@@ -43,7 +43,8 @@ namespace Game.Battles
       Stats = new CombatantStats { Atk = 1, Hp = 2 },
       Reactions = new List<IReaction>
       {
-        new DialogueOnTurnStarted(DialoguesList.First),
+        new DialogueOnTurnStarted(DialoguesList.Elf),
+        new SmileDialogueOnDeath(DialoguesList.ElfDead, DialoguesList.ElfSmile),
         new SellTutorSmileDialogue()
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
@@ -56,7 +57,8 @@ namespace Game.Battles
       Stats = new CombatantStats { Atk = 1, Hp = 2 },
       Reactions = new List<IReaction>
       {
-        new DialogueOnTurnStarted(DialoguesList.First),
+        new DialogueOnTurnStarted(DialoguesList.Knight),
+        new SmileDialogueOnDeath(DialoguesList.KnightDead, DialoguesList.KnightSmile),
         new SellTutorSmileDialogue()
       },
       Tags = new Dictionary<Type, ICombatantTag> { { typeof(MainHeroTag), new MainHeroTag() } },
@@ -79,7 +81,7 @@ namespace Game.Battles
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.CatEnemy,
-      Souls = 2
+      Souls = 3
     };
 
     public static CombatantData Goat => new()
@@ -88,25 +90,37 @@ namespace Game.Battles
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.Goat,
-      Souls = 2
+      Souls = 4
     };
 
     public static CombatantData Heads => new()
     {
-      Stats = new CombatantStats { Atk = 4, Hp = 5 },
+      Stats = new CombatantStats { Atk = 7, Hp = 7 },
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.Heads,
-      Souls = 2
+      Souls = 4
     };
 
     public static CombatantData Scarecrow => new()
     {
-      Stats = new CombatantStats { Atk = 4, Hp = 5 },
+      Stats = new CombatantStats { Atk = 10, Hp = 10 },
       Reactions = new List<IReaction> { new DropSoulsOnDeath() },
       Tags = new Dictionary<Type, ICombatantTag> { },
       SpritePath = Assets.Scarecrow,
-      Souls = 2
+      Souls = 4
+    };
+
+    public static CombatantData Chest => new()
+    {
+      Stats = new CombatantStats { Atk = 12, Hp = 25 },
+      Reactions = new List<IReaction>
+      {
+        new SmileDialogueOnDeath(null, DialoguesList.Win),
+        new WinOnDeath()
+      },
+      Tags = new Dictionary<Type, ICombatantTag> { },
+      SpritePath = Assets.ChestSprite,
     };
   }
 }

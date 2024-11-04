@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Game.Infrastructure.AssetsManagement;
 using Game.Shop;
 
@@ -12,21 +13,38 @@ namespace Game.Cards
       Finger,
       Cake
     };
-    
+
+    public static List<CardData> SmallTrash => new()
+    {
+      EyeTrash,
+      Finger,
+      Cake
+    };
+
     public static List<CardData> Trash => new()
     {
       EyeTrash,
       FingerTrash,
-      CakeTrash
+      CakeTrash,
+      Eye,
+      Finger,
+      Cake
     };
-    
+
+    public static List<CardData> FullTrash => new()
+    {
+      Eye,
+      FingerTrash,
+      CakeTrash,
+    };
+
     public static List<CardData> Rare => new()
     {
       EyeRare,
       FingerRare,
-      CakeRare
+      CakeRare,
     };
-    
+
     public static List<CardData> Immortal => new()
     {
       Skull,
@@ -39,7 +57,12 @@ namespace Game.Cards
       BuyCost = 1,
       SellCost = 0,
       SpritePath = Assets.CardEyeTrash,
-      Spell = new DecreaseEnemyAtkSpell(0)
+      Spell = new BrokenSpell(),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Eye), new Eye() },
+        { typeof(Broken), new Broken() },
+      }
     };
 
     public static CardData Eye => new()
@@ -47,7 +70,11 @@ namespace Game.Cards
       BuyCost = 2,
       SellCost = 1,
       SpritePath = Assets.CardEye,
-      Spell = new DecreaseEnemyAtkSpell(1)
+      Spell = new DecreaseEnemyAtkSpell(1),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Eye), new Eye() },
+      }
     };
 
     public static CardData EyeRare => new()
@@ -55,7 +82,11 @@ namespace Game.Cards
       BuyCost = 4,
       SellCost = 2,
       SpritePath = Assets.CardEye,
-      Spell = new DecreaseEnemyAtkSpell(4)
+      Spell = new DecreaseEnemyAtkSpell(4),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Eye), new Eye() },
+      }
     };
 
     public static CardData Finger => new()
@@ -63,7 +94,11 @@ namespace Game.Cards
       BuyCost = 2,
       SellCost = 1,
       SpritePath = Assets.CardFinger,
-      Spell = new IncreaseAtkSpell(1)
+      Spell = new IncreaseAtkSpell(2),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Finger), new Finger() },
+      }
     };
 
     public static CardData FingerTrash => new()
@@ -71,15 +106,24 @@ namespace Game.Cards
       BuyCost = 1,
       SellCost = 0,
       SpritePath = Assets.CardFingerTrash,
-      Spell = new IncreaseAtkSpell(0)
+      Spell = new BrokenSpell(),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Finger), new Finger() },
+        { typeof(Broken), new Broken() },
+      }
     };
 
     public static CardData FingerRare => new()
     {
-      BuyCost = 4,
+      BuyCost = 3,
       SellCost = 2,
       SpritePath = Assets.CardFinger,
-      Spell = new IncreaseAtkSpell(4)
+      Spell = new IncreaseAtkSpell(3),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Finger), new Finger() },
+      }
     };
 
     public static CardData Cake => new()
@@ -87,7 +131,11 @@ namespace Game.Cards
       BuyCost = 2,
       SellCost = 1,
       SpritePath = Assets.CardCake,
-      Spell = new IncreaseHpSpell(2)
+      Spell = new IncreaseHpSpell(2),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Cake), new Cake() },
+      }
     };
 
     public static CardData CakeTrash => new()
@@ -95,15 +143,24 @@ namespace Game.Cards
       BuyCost = 1,
       SellCost = 0,
       SpritePath = Assets.CardCakeTrash,
-      Spell = new IncreaseHpSpell(0)
+      Spell = new BrokenSpell(),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Cake), new Cake() },
+        { typeof(Broken), new Broken() },
+      }
     };
 
     public static CardData CakeRare => new()
     {
-      BuyCost = 4,
+      BuyCost = 3,
       SellCost = 2,
       SpritePath = Assets.CardCake,
-      Spell = new IncreaseHpSpell(4)
+      Spell = new IncreaseHpSpell(4),
+      Tags = new Dictionary<Type, ICardTag>
+      {
+        { typeof(Cake), new Cake() },
+      }
     };
 
     public static CardData Skull => new()
@@ -113,21 +170,21 @@ namespace Game.Cards
       SpritePath = Assets.CardSkull,
       Spell = new DecreaseEnemyAtkForEyeSpell(3)
     };
-    
+
     public static CardData Hand => new()
     {
       BuyCost = 6,
       SellCost = 3,
       SpritePath = Assets.CardHand,
-      Spell = new IncreaseAtkSpell(9)
+      Spell = new IncreaseAtkForFingerSpell(9)
     };
-  
+
     public static CardData FullCake => new()
     {
       BuyCost = 6,
       SellCost = 3,
       SpritePath = Assets.CardFullCake,
-      Spell = new IncreaseHpSpell(9)
+      Spell = new IncreaseHpForCakeSpell(9)
     };
   }
 }
