@@ -81,7 +81,7 @@ namespace Game.Cards
     {
       BuyCost = 3,
       SellCost = 2,
-      SpritePath = Assets.CardEye,
+      SpritePath = Assets.CardEyeRare,
       Spell = new DecreaseEnemyAtkSpell(3),
       Tags = new Dictionary<Type, ICardTag>
       {
@@ -118,7 +118,7 @@ namespace Game.Cards
     {
       BuyCost = 3,
       SellCost = 2,
-      SpritePath = Assets.CardFinger,
+      SpritePath = Assets.CardFingerRare,
       Spell = new IncreaseAtkSpell(3),
       Tags = new Dictionary<Type, ICardTag>
       {
@@ -155,7 +155,7 @@ namespace Game.Cards
     {
       BuyCost = 3,
       SellCost = 2,
-      SpritePath = Assets.CardCake,
+      SpritePath = Assets.CardCakeRare,
       Spell = new IncreaseHpSpell(5),
       Tags = new Dictionary<Type, ICardTag>
       {

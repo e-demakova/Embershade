@@ -70,7 +70,7 @@ namespace Game.Battles
 
     private async UniTask Attack(CombatantData actor, CombatantData target)
     {
-      if (actor.IsDead)
+      if (actor.IsDead || actor.Stats.Atk == 0)
         return;
 
       await actor.Instance.MoveToTarget(target.Instance);

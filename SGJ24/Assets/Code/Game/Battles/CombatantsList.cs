@@ -113,7 +113,7 @@ namespace Game.Battles
 
     public static CombatantData Chest => new()
     {
-      Stats = new CombatantStats { Atk = 15, Hp = 40 },
+      Stats = new CombatantStats { Atk = 15, Hp = 30 },
       Reactions = new List<IReaction>
       {
         new DialogueOnSecondChest(),

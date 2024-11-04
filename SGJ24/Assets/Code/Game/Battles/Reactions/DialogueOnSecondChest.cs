@@ -9,7 +9,6 @@ namespace Game.Battles.Reactions
   public class DialogueOnSecondChest : IReaction
   {
     private IGameData _data;
-    private int _availableExecutions = 1;
     private MainCamera MainCamera => _data.Get<SceneData>().Get<MainCamera>();
 
     [Inject]
@@ -19,18 +18,16 @@ namespace Game.Battles.Reactions
     }
 
     public bool CanReact(ITrigger trigger, CombatantData owner) =>
-      _availableExecutions > 0 && trigger is BattleStartedTrigger;
+      trigger is BattleStartedTrigger;
 
     public async UniTask React(ITrigger trigger, CombatantData owner)
     {
-      if (_data.Get<ProgressData>().ChestMeet != 1)
+      if (_data.Get<ProgressData>().ChestMeet < 1)
       {
         _data.Get<ProgressData>().ChestMeet++;
         return;
       }
       
-      _availableExecutions--;
-
       await MainCamera.ZoomIn();
       await _data.Get<SceneData>().Get<DialogueUI>().ShowDialogue(DialoguesList.MeetChestSecondTime);
       await MainCamera.ZoomOut();

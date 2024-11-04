@@ -18,8 +18,8 @@ namespace Game.Dialogues
     {
       Entries = new List<LocalizedEntry>
       {
-        new() { Language = Language.Eng, String = "Corrupted." },
-        new() { Language = Language.Ru, String = "Поврежден." }
+        new() { Language = Language.Eng, String = "Corrupted" },
+        new() { Language = Language.Ru, String = "Поврежден" }
       }
     };
 

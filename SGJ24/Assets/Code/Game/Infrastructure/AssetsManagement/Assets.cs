@@ -24,13 +24,16 @@
     
     //cards
     public const string CardEye = "Cards/eye";
+    public const string CardEyeRare = "Cards/eyes-double";
     public const string CardEyeTrash = "Cards/eye-trash";
     public const string CardSkull = "Cards/skull";
     public const string CardCake = "Cards/cake";
+    public const string CardCakeRare = "Cards/cake-rare";
     public const string CardCakeTrash = "Cards/cake-trash";
     public const string CardFullCake = "Cards/full-cake";
     public const string CardFinger = "Cards/finger";
     public const string CardFingerTrash = "Cards/finger-trash";
+    public const string CardFingerRare = "Cards/finger-rare";
     public const string CardHand = "Cards/hand";
     
     public const string Support = "Battle/support";
